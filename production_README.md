@@ -57,6 +57,7 @@ Everything else is to create a mob, push it into the MOBS array, then work out t
 - Making sprites move (animation),
 - Adding more modes,
 - Adding another aspect to game (eg. offer boons to players at the start of each round).
+- Fixing the flickering screen
 
 ## File Structure
 
