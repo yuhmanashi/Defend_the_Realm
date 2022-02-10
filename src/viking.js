@@ -46,7 +46,7 @@ class Viking {
         ctx.drawImage(IMAGES[this.type], this.x, this.y);
 
         // ctx.drawImage(IMAGES[this.type], this.frame * this.spriteWidth, this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x, this.y, this.spriteWidth, this.spriteHeight);
-        ctx.fillStyle = '#EBB9CB';
+        ctx.fillStyle = '#f2e277';
         ctx.font = '20px Syne Tactile, cursive';
         // ctx.fillText(this.id, this.x + 40, this.y - 30)
         ctx.fillText(Math.floor(this.hp), this.x + 45, this.y)
