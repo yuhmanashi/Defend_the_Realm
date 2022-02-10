@@ -1,0 +1,30 @@
+{
+  "name": "td-project",
+  "version": "1.0.0",
+  "description": "## Background",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
+  },
+  "browserslist": [
+    "defaults"
+  ],
+  "scripts": {
+    "build": "webpack --mode=production",
+    "start": "webpack --watch --mode=development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuhmanashi/td-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yuhmanashi/td-project/issues"
+  },
+  "homepage": "https://github.com/yuhmanashi/td-project#readme"
+}
