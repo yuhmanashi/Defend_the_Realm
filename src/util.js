@@ -15,7 +15,7 @@ const Util = {
         function preloadImage(src, images, callback){
             const img = new Image();
             img.onload = callback;
-            img.src = `../assets/images/${src}.png`;
+            img.src = `./assets/images/${src}.png`;
             images.push(img);
         };
     },
