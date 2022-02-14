@@ -15,7 +15,7 @@ const Util = {
         function preloadImage(src, images, callback){
             const img = new Image();
             img.onload = callback;
-            img.src = `Defend_the_Realm/assets/images/${src}.png`;
+            img.src = `../assets/images/${src}.png`;
             images.push(img);
         };
     },

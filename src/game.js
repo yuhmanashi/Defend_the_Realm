@@ -240,7 +240,7 @@ mouse.canvas.addEventListener('click', event => {
     validPos = true;
     mouse.x = event.x - canvasPosition.left;
     mouse.y = event.y - canvasPosition.top;
-    console.log(mouse.x, mouse.y);
+    // console.log(mouse.x, mouse.y);
 
     if (!animationOn) {
         if(gameOver || player.winGame) {
