@@ -69,7 +69,6 @@ class Tower {
                 let enemies = towers[i].findEnemies(vikings);
                 if (enemies instanceof Array) {
                     towers[i].addAttack(enemies);
-                    // console.log(towers[i].currentAttacks());
                 };
             }
             towers[i].updateFrame(frame);
