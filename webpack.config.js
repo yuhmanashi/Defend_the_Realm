@@ -10,8 +10,8 @@ module.exports = {
 
     target: 'web',
     
-    watchOptions: {
-        poll: true,
-        ignored: /node_modules/,
-      },
+    // watchOptions: {
+    //     poll: true,
+    //     ignored: /node_modules/,
+    //   },
 };
