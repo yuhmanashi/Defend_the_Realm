@@ -91,6 +91,14 @@ class Tower {
         return ATTACKS;
     }
 
+    checkMoney(player){
+        if (player.money > 0 && player.money - this.cost >= 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     payCost(player){
         player.money -= this.cost;
     }

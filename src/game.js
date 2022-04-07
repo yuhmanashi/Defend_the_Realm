@@ -270,7 +270,7 @@ mouse.canvas.addEventListener('click', event => {
                     }
                 }
 
-                if (validPos) {
+                if (validPos && mouse.tower.checkMoney(player)) {
                     taken.push(mouse.x);
                     if (mouse.y <= (platform.y + 10) && mouse.y >= platform.upperY){
                         mouse.tower.update(mouse.x, (platform.y - 35));

@@ -85,6 +85,14 @@ class Player {
     playerScore(){
         return this.score;
     }
+
+    checkMoney(towerCost){
+        if (this.money > 0 && this.money - towerCost >= 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
 module.exports = Player;
