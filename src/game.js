@@ -16,7 +16,7 @@ canvas.height = 600;
 const backgroundURLs = ['background/forest', 'misc/play250x83', 'misc/scroll3', 'misc/exit', 'misc/endless'];
 const backgrounds = [];
 
-const hudURLs = ['background/hud', 'towers/base/knightbase120', 'towers/base/archerbase120', 'towers/base/icewizardbase120']
+const hudURLs = ['background/hud', 'towers/base/knightbase120', 'towers/base/archerbase120', 'towers/base/icewizardbase120', 'misc/speedbtn2']
 const HUD = [];
 
 const portalURLs = ['portal/50x105', 'portal/endgreen']
@@ -35,6 +35,7 @@ let frame = 0;
 let animationOn = false;
 let gameOver = false;
 let modeSelected = false;
+let gameSpeed = 1;
 
 class Game {
     constructor(){
@@ -69,6 +70,7 @@ class Game {
         ctx.drawImage(HUD[1], 0, 470);
         ctx.drawImage(HUD[2], 80, 470);
         ctx.drawImage(HUD[3], 160, 470);
+        ctx.drawImage(HUD[4], 350, 480);
         
         ctx.fillStyle = 'black';
         ctx.font = '20px Supermercado One, cursive';
@@ -211,7 +213,7 @@ class Game {
             platform.preloadPlatforms(platform.draw.bind(platform));
             this.loadPortals();
             this.loadHUD();
-            player.draw();
+            player.draw(gameSpeed);
             if (player.hp < 1) {
                 animationOn = false;
                 gameOver = true;
@@ -219,9 +221,11 @@ class Game {
             }
             if (player.hp > 0) {
                 baseTower.manageTowers(mob.currentMobs(), frame);
-                mob.manageMobs(player, baseTower.currentAttacks(), frame);
+                mob.manageMobs(player, baseTower.currentAttacks(), frame, gameSpeed);
             }
-            frame++;
+
+            frame = frame += gameSpeed
+            // if i change frame here it speeds up mob spawn and attack freq but not animation
         }
 
         requestAnimationFrame(this.animate.bind(this));
@@ -240,7 +244,7 @@ mouse.canvas.addEventListener('click', event => {
     validPos = true;
     mouse.x = event.x - canvasPosition.left;
     mouse.y = event.y - canvasPosition.top;
-    // console.log(mouse.x, mouse.y);
+    console.log(mouse.x, mouse.y);
 
     if (!animationOn) {
         if(gameOver || player.winGame) {
@@ -284,6 +288,14 @@ mouse.canvas.addEventListener('click', event => {
             mouse.tower = null;
         }
         
+        if (mouse.x >= 358 && mouse.x <= 438 && mouse.y >= 500 && mouse.y <= 570) {
+            if (gameSpeed === 1) {
+                gameSpeed = 2;
+            } else if (gameSpeed === 2) {
+                gameSpeed = 1;
+            }
+            console.log(gameSpeed)
+        }
         // knight position range-x: 35-91 range-y: 467-558
         // archer position range-x: 102-175 range-y: 467-560
         // wizard position range-x: 202-254 range-y: 470-562

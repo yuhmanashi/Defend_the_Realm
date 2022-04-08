@@ -1,13 +1,14 @@
 const Viking = require("../viking.js")
 
 class Viking1 extends Viking{
-    constructor(wave){
-        super(wave);
+    constructor(wave, speedScalar){
+        super(wave, speedScalar);
         this.type = 0;
         this.hp = 5;
-        this.speed = .2;
+        this.speed = .2 * speedScalar;
+        this.maxSpeed = .2 * speedScalar;
         this.damage = 1;
-        this.spawnrate = 200;
+        this.spawnrate = 200 * speedScalar;
     }
 
     waveScalar(){

@@ -9,8 +9,9 @@ const IMAGES = [];
 const VIKINGS = [];
 
 class Viking {
-    constructor(wave) {
+    constructor(wave, speedScale) {
         this.wave = wave;
+        this.speedScale = speedScale;
         this.id = 0;
         this.type = 0;
         this.x = 30; // start = platform.x - 20;
@@ -24,13 +25,17 @@ class Viking {
         this.hp = 5;
         this.maxHP = this.hp;
         this.posX = this.x;
-        this.speed = .2;
+        this.speed = .2 * speedScale;
+        this.maxSpeed = .2 * speedScale
         this.damage = 1;
         this.spawnrate = 200;
     }
 
     update(index){
         // this.frame = frame % 10;
+        if (this.speed !== this.maxSpeed) {
+            this.speed = this.maxSpeed
+        }
         if (this.x <= 670) {
             this.x += this.speed; // .5
             this.posX = this.x + 55;
@@ -107,6 +112,12 @@ class Viking {
 
     currentURLS(){
         return URLS;
+    }
+
+    updateSpeed(speed){
+        if (this.speed < this.maxSpeed && this.speed * speed <= this.maxSpeed){
+            this.speed = this.speed * speed
+        }
     }
 }
 
