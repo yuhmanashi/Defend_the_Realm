@@ -39,7 +39,8 @@ let gameSpeed = 1;
 
 class Game {
     constructor(){
-        this.animationOn = false;;
+        this.animationOn = false;
+        this.gameSpeed = 1;
     }
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -193,7 +194,15 @@ class Game {
         this.preloadBackgrounds(backgroundURLs, backgrounds, this.renderGameMode)
     }
     ////////////////////////////////////////////////////////////////////////////
+    updateGameSpeed(){
+        if (!(gameSpeed === this.gameSpeed)){
+            this.gameSpeed = gameSpeed;
+            console.log(this.gameSpeed)
+        }
+    }
+
     animate(){
+        this.updateGameSpeed();
         if (player.winGame) {
             animationOn = false;
             mouse.x = 0;
@@ -213,7 +222,8 @@ class Game {
             platform.preloadPlatforms(platform.draw.bind(platform));
             this.loadPortals();
             this.loadHUD();
-            player.draw(gameSpeed);
+            player.draw(this.gameSpeed);
+            console.log('animation check')
             if (player.hp < 1) {
                 animationOn = false;
                 gameOver = true;
@@ -221,10 +231,10 @@ class Game {
             }
             if (player.hp > 0) {
                 baseTower.manageTowers(mob.currentMobs(), frame);
-                mob.manageMobs(player, baseTower.currentAttacks(), frame, gameSpeed);
+                mob.manageMobs(player, baseTower.currentAttacks(), frame, this.gameSpeed);
             }
 
-            frame = frame += gameSpeed
+            frame = frame + this.gameSpeed
             // if i change frame here it speeds up mob spawn and attack freq but not animation
         }
 
@@ -292,6 +302,8 @@ mouse.canvas.addEventListener('click', event => {
             if (gameSpeed === 1) {
                 gameSpeed = 2;
             } else if (gameSpeed === 2) {
+                gameSpeed = 4;
+            } else {
                 gameSpeed = 1;
             }
             console.log(gameSpeed)

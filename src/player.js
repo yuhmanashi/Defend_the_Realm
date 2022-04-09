@@ -57,7 +57,7 @@ class Player {
                 this.winGame = true;
             } else {
                 this.mobsDeath = 0;
-                this.mobsCount = this.mobsCount * 2;
+                this.mobsCount = Math.floor(this.mobsCount * 1.5);
                 this.wave += 1;
                 this.waveOver = true;
             }

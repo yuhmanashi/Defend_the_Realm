@@ -9,9 +9,8 @@ const IMAGES = [];
 const VIKINGS = [];
 
 class Viking {
-    constructor(wave, speedScale) {
+    constructor(wave) {
         this.wave = wave;
-        this.speedScale = speedScale;
         this.id = 0;
         this.type = 0;
         this.x = 30; // start = platform.x - 20;
@@ -25,17 +24,14 @@ class Viking {
         this.hp = 5;
         this.maxHP = this.hp;
         this.posX = this.x;
-        this.speed = .2 * speedScale;
-        this.maxSpeed = .2 * speedScale
+        this.speed = .2;
+        this.baseSpeed = .2;
         this.damage = 1;
         this.spawnrate = 200;
     }
 
     update(index){
         // this.frame = frame % 10;
-        if (this.speed !== this.maxSpeed) {
-            this.speed = this.maxSpeed
-        }
         if (this.x <= 670) {
             this.x += this.speed; // .5
             this.posX = this.x + 55;
@@ -55,6 +51,9 @@ class Viking {
         ctx.font = '20px Syne Tactile, cursive';
         // ctx.fillText(this.id, this.x + 40, this.y - 30)
         ctx.fillText(Math.floor(this.hp), this.x + 45, this.y)
+        ctx.fillStyle = '#f2e277';
+        ctx.fillText(this.speed, this.x + 35, this.y + 110)
+        ctx.fillText(this.spawnRate, this.x + 35, this.y + 130)
         // ctx.fillText(Math.floor(this.x + 55), this.x + 30, this.y + 120)
     }
 
@@ -114,10 +113,9 @@ class Viking {
         return URLS;
     }
 
-    updateSpeed(speed){
-        if (this.speed < this.maxSpeed && this.speed * speed <= this.maxSpeed){
-            this.speed = this.speed * speed
-        }
+    updateSpeed(gameSpeed){
+        this.speed = this.baseSpeed * gameSpeed;
+        // this.spawnRate = this.baseSpawnRate * gameSpeed;
     }
 }
 
