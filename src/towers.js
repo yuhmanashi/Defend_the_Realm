@@ -38,9 +38,9 @@ class Tower {
 
     draw(){
         ctx.drawImage(IMAGES[this.type], this.x, this.y);
-        // ctx.fillStyle = 'white';
-        // ctx.font = '30px Arial';
-        // ctx.fillText(Math.floor(this.x + 60), this.x + 40, this.y + 10);
+        ctx.fillStyle = '#f2e277';
+        ctx.font = '20px Syne Tactile, cursive';
+        ctx.fillText(this.speed, this.x + 40, this.y + 130)
     }
 
     drawRect(){
@@ -62,10 +62,11 @@ class Tower {
         })
     }
 
-    manageTowers(vikings, frame){
+    manageTowers(vikings, frame, gameSpeed){
+        this.changeSpeed(gameSpeed)
         const towers = this.sortedTowers();
         for (let i = 0; i < towers.length; i++){
-            if (frame % towers[i].speed === 0) {
+            if (Math.floor(frame) % Math.floor(towers[i].speed) === 0) {
                 let enemies = towers[i].findEnemies(vikings);
                 if (enemies instanceof Array) {
                     towers[i].addAttack(enemies);
@@ -101,6 +102,25 @@ class Tower {
 
     payCost(player){
         player.money -= this.cost;
+    }
+
+    checkSpeed(gameSpeed){
+        TOWERS.every(tower => {
+            (tower.speed * gameSpeed) === tower.baseSpeed
+        })
+    }
+
+    changeSpeed(gameSpeed){
+        if (!this.checkSpeed(gameSpeed)){
+            for (let i = 0; i < TOWERS.length; i++){
+                TOWERS[i].updateSpeed(gameSpeed)
+            }
+        }
+    }
+
+    updateSpeed(gameSpeed){
+        this.speed = this.baseSpeed / gameSpeed;
+        // this.spawnRate = this.baseSpawnRate * gameSpeed;
     }
 }
 

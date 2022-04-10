@@ -41,7 +41,6 @@ class Mob {
 
     manageMobs(player, attacks, frame, speed){
         gameSpeed = speed;
-        console.log(MOBS)
         if (player.waveOver) {
             MOBS.splice(0, MOBS.length)
             if (player.winGame) {
@@ -55,7 +54,7 @@ class Mob {
         if (player.waveCount() > 1) mob.waveScalar();
         this.changeSpeed(gameSpeed);
 
-        if (frame % mob.spawnRate === 0 && MOBS.length < player.mobsCount) {
+        if (Math.floor(frame * speed) % Math.floor(mob.spawnRate) === 0 && MOBS.length < player.mobsCount) {
             MOBS.push(mob);
         }
 

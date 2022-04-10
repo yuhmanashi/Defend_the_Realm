@@ -4,7 +4,7 @@ class Viking1 extends Viking{
     constructor(wave){
         super(wave);
         this.type = 0;
-        this.hp = 5;
+        this.hp = 6;
         this.speed = .2;
         this.baseSpeed = .2;
         this.damage = 1;
