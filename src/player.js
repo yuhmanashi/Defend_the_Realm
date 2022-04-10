@@ -18,12 +18,12 @@ class Player {
         this.mode = 0;
     }
 
-    draw(){
+    draw(speed){
         ctx.fillStyle = 'white';
         ctx.font = '50px Architects Daughter, cursive';
         ctx.fillText(`Wave: ${this.wave}/${this.maxWave}`, 20, 50);
         ctx.fillText(`Enemies: ${this.mobsDeath}/${this.mobsCount}`, 450, 50)
-        
+        ctx.fillText(`Speed: ${speed}x`, 450, 100);
         if (this.mode === 1) {
             ctx.fillText(`Score: ${this.score}`, 20, 110);
         }
@@ -57,7 +57,7 @@ class Player {
                 this.winGame = true;
             } else {
                 this.mobsDeath = 0;
-                this.mobsCount = this.mobsCount * 2;
+                this.mobsCount = Math.floor(this.mobsCount * 1.5);
                 this.wave += 1;
                 this.waveOver = true;
             }

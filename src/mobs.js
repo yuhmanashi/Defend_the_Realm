@@ -9,6 +9,7 @@ const URLS = ['mobs/viking1_90', 'mobs/viking2_90', 'mobs/viking3_90'];
 const IMAGES = [];
 
 const MOBS = [];
+let gameSpeed = 1;
 
 class Mob {
     constructor() {
@@ -19,12 +20,27 @@ class Mob {
         this.canvas.addEventListener(type, listener);
     }
 
-    createMob(wave){
+    createMob(wave, speed){
         let num = Math.floor(Math.random() * 3)
-        return num === 0 ? new Viking1(wave) : num === 1 ? new Viking2(wave) : new Viking3(wave);
+        return num === 0 ? new Viking1(wave, speed) : num === 1 ? new Viking2(wave, speed) : new Viking3(wave, speed);
     }
 
-    manageMobs(player, attacks, frame){
+    checkSpeed(gameSpeed){
+        MOBS.every(mob => {
+            (mob.speed/gameSpeed) === mob.baseSpeed
+        })
+    }
+
+    changeSpeed(gameSpeed){
+        if (!this.checkSpeed(gameSpeed)){
+            for (let i = 0; i < MOBS.length; i++){
+                MOBS[i].updateSpeed(gameSpeed)
+            }
+        }
+    }
+
+    manageMobs(player, attacks, frame, speed){
+        gameSpeed = speed;
         if (player.waveOver) {
             MOBS.splice(0, MOBS.length)
             if (player.winGame) {
@@ -36,8 +52,9 @@ class Mob {
         
         let mob = this.createMob(player.waveCount());
         if (player.waveCount() > 1) mob.waveScalar();
+        this.changeSpeed(gameSpeed);
 
-        if (frame % mob.spawnrate === 0 && MOBS.length < player.mobsCount) {
+        if (Math.floor(frame * speed) % Math.floor(mob.spawnRate) === 0 && MOBS.length < player.mobsCount) {
             MOBS.push(mob);
         }
 
@@ -46,8 +63,9 @@ class Mob {
             MOBS[el].loseHP(totalDMG);
             delete(attacks[el]);
         });
+
         for (let i = 0; i < MOBS.length; i++){
-            MOBS[i].update(i);
+            MOBS[i].update(i)
             MOBS[i].preload(MOBS[i].draw.bind(MOBS[i]));
             if (MOBS[i].x >= 670){
                 player.loseHP(MOBS[i].damage);
