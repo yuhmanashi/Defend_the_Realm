@@ -41,6 +41,7 @@ class Game {
     constructor(){
         this.animationOn = false;
         this.gameSpeed = 1;
+        this.updateGameSpeed = this.updateGameSpeed.bind(this);
     }
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -194,15 +195,16 @@ class Game {
         this.preloadBackgrounds(backgroundURLs, backgrounds, this.renderGameMode)
     }
     ////////////////////////////////////////////////////////////////////////////
-    updateGameSpeed(){
+    updateGameSpeed(speed){
         if (speed !== this.gameSpeed){
             this.gameSpeed = speed;
         }
-        console.log(this.gameSpeed, speed)
+        // console.log(this.gameSpeed, speed)
     }
 
     animate(){
-        this.updateGameSpeed();
+        this.updateGameSpeed(speed);
+        mouse.offsetRecalc();
         if (player.winGame) {
             animationOn = false;
             mouse.x = 0;
@@ -244,7 +246,7 @@ class Game {
 }
 
 // mouse interaction
-const canvasPosition = canvas.getBoundingClientRect(); // canvas position at top right corner
+// const canvasPosition = canvas.getBoundingClientRect(); // canvas position at top right corner
 
 let mouse = new Mouse(canvas, ctx);
 let taken = [];
@@ -253,9 +255,10 @@ const platformboundary = [90, 720] // 50 + 40, 750 - 30
 
 mouse.canvas.addEventListener('click', event => {
     validPos = true;
-    mouse.x = event.x - canvasPosition.left;
-    mouse.y = event.y - canvasPosition.top;
+    mouse.x = event.x - mouse.offsetX;
+    mouse.y = event.y - mouse.offsetY;
     // console.log(mouse.x, mouse.y);
+    // console.log(window.innerWidth, window.innerHeight)
 
     if (!animationOn) {
         if(gameOver || player.winGame) {
@@ -305,7 +308,7 @@ mouse.canvas.addEventListener('click', event => {
             } else {
                 speed *= 2;
             }
-            console.log(speed)
+            // console.log(speed)
         }
         // knight position range-x: 35-91 range-y: 467-558
         // archer position range-x: 102-175 range-y: 467-560

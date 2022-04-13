@@ -5,6 +5,8 @@ class Mouse {
         this.x = canvas.width/2,
         this.y = canvas.height/2,
         this.tower = null;
+        this.offsetX = 0;
+        this.offsetY = 0;
     }
 
     addEventListener(type, listener){
@@ -14,6 +16,12 @@ class Mouse {
     checkRange(x1, x2, range){
         if (x1 <= x2 - range || x1 >= x2 + range) return true;
         return false;
+    }
+
+    offsetRecalc(){
+        const canvasPosition = this.canvas.getBoundingClientRect();
+        this.offsetX = canvasPosition.left;
+        this.offsetY = canvasPosition.top;
     }
 }
 
