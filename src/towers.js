@@ -38,9 +38,9 @@ class Tower {
 
     draw(){
         ctx.drawImage(IMAGES[this.type], this.x, this.y);
-        ctx.fillStyle = '#f2e277';
-        ctx.font = '20px Syne Tactile, cursive';
-        ctx.fillText(this.speed, this.x + 40, this.y + 130)
+        // ctx.fillStyle = '#f2e277';
+        // ctx.font = '20px Syne Tactile, cursive';
+        // ctx.fillText(this.speed, this.x + 40, this.y + 130)
     }
 
     drawRect(){

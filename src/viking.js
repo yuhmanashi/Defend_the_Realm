@@ -51,8 +51,8 @@ class Viking {
         ctx.font = '20px Syne Tactile, cursive';
         // ctx.fillText(this.id, this.x + 40, this.y - 30)
         ctx.fillText(Math.floor(this.hp), this.x + 45, this.y)
-        ctx.fillText(this.speed, this.x + 35, this.y + 110)
-        ctx.fillText(this.spawnRate, this.x + 35, this.y + 130)
+        // ctx.fillText(this.speed, this.x + 35, this.y + 110)
+        // ctx.fillText(this.spawnRate, this.x + 35, this.y + 130)
         // ctx.fillText(Math.floor(this.x + 55), this.x + 30, this.y + 120)
     }
 
