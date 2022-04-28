@@ -20,6 +20,11 @@ body {
     margin-left: 10px;
 }
 
+#navLinks li a img.a-logo {
+    height: 33px;
+    width: 33px;
+}
+
 #title {
     color: rgba(54, 68, 45, 0.747);
     font-family: 'Berkshire Swash', cursive;
