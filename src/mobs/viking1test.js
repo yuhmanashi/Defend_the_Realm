@@ -6,8 +6,9 @@ const runAnimation = ['mobs/viking1/0', 'mobs/viking1/1', 'mobs/viking1/2', 'mob
 class Viking1 extends Viking{
     constructor(wave){
         super(wave);
-        this.type = 3;
+        this.type = 0;
         this.hp = 6;
+        this.y = 200
         this.speed = .2;
         this.baseSpeed = .2;
         this.damage = 1;
