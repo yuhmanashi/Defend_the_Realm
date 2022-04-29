@@ -6,9 +6,9 @@ class Wizard extends Tower{
         this.type = 2;
         this.color = 'blue';
         this.range = 300;
-        this.damage = 3;
-        this.speed = 1000;
-        this.baseSpeed = 1000;
+        this.damage = 4;
+        this.speed = 1100;
+        this.baseSpeed = 1100;
         this.cost = 100;
     }
 
