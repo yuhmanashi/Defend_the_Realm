@@ -7,8 +7,8 @@ class Archer extends Tower{
         this.color = 'green';
         this.range = 250;
         this.damage = 2;
-        this.speed = 200;
-        this.baseSpeed = 200;
+        this.speed = 300;
+        this.baseSpeed = 300;
         this.cost = 50;
     }
 

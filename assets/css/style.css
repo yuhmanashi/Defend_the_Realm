@@ -20,6 +20,11 @@ body {
     margin-left: 10px;
 }
 
+#navLinks li a img.a-logo {
+    height: 33px;
+    width: 33px;
+}
+
 #title {
     color: rgba(54, 68, 45, 0.747);
     font-family: 'Berkshire Swash', cursive;
@@ -42,6 +47,7 @@ body {
     font-family: 'Supermercado One', cursive;
     border: 5px solid black;
     background-color: beige;
+    padding: 10px;
     flex-basis: 190px;
     flex-grow: 0;
     flex-shrink: 0;
