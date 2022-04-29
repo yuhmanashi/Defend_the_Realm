@@ -1,4 +1,4 @@
-const Viking1 = require("./mobs/viking1.js");
+const Viking1 = require("./mobs/viking1test.js");
 const Viking2 = require("./mobs/viking2.js");
 const Viking3 = require("./mobs/viking3.js");
 
@@ -20,9 +20,13 @@ class Mob {
         this.canvas.addEventListener(type, listener);
     }
 
+    // createMob(wave, speed){
+    //     let num = Math.floor(Math.random() * 3)
+    //     return num === 0 ? new Viking1(wave, speed) : num === 1 ? new Viking2(wave, speed) : new Viking3(wave, speed);
+    // }
+
     createMob(wave, speed){
-        let num = Math.floor(Math.random() * 3)
-        return num === 0 ? new Viking1(wave, speed) : num === 1 ? new Viking2(wave, speed) : new Viking3(wave, speed);
+        return new Viking1(wave, speed)
     }
 
     checkSpeed(gameSpeed){
@@ -65,7 +69,7 @@ class Mob {
         });
 
         for (let i = 0; i < MOBS.length; i++){
-            MOBS[i].update(i)
+            MOBS[i].update(i, frame)
             MOBS[i].preload(MOBS[i].draw.bind(MOBS[i]));
             if (MOBS[i].x >= 670){
                 player.loseHP(MOBS[i].damage);
