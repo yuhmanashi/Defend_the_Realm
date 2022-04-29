@@ -47,6 +47,7 @@ body {
     font-family: 'Supermercado One', cursive;
     border: 5px solid black;
     background-color: beige;
+    padding: 10px;
     flex-basis: 190px;
     flex-grow: 0;
     flex-shrink: 0;
