@@ -30,10 +30,12 @@ class Viking {
         this.baseSpeed = .2;
         this.damage = 1;
         this.spawnrate = 200;
+        this.animation = [];
     }
 
     update(index, frame){
-        this.frame = Math.floor((frame / 4) % 10);
+        this.frame = Math.floor((frame / 3) % 10);
+        
         if (this.x <= 670) {
             this.x += this.speed; // .5
             this.posX = this.x + 55;
@@ -46,7 +48,7 @@ class Viking {
     // }
 
     preload(callback){
-        Util.preloadImages(VikingOne, IMAGES, callback);
+        Util.preloadImages(this.animation, IMAGES, callback);
     }
 
     draw(){
@@ -55,20 +57,20 @@ class Viking {
         // per sprite width = 77
         // this.x = 30
         // this.y = 225
-        let sizeHeight = 120;
-        let sizeWidth = 120;
+        let sizeHeight = 150;
+        let sizeWidth = 150;
         let spriteWidth = 90;
         let spriteHeight = 90;
         let spriteStartWidth = 90;
         let spriteStartHeight = 0;
 
-        ctx.drawImage(IMAGES[this.frame], this.x, 210, sizeWidth, sizeHeight)
+        ctx.drawImage(IMAGES[this.frame], this.x, 185, sizeWidth, sizeHeight)
         // ctx.drawImage(IMAGES[this.type], this.x, this.y);
         // ctx.drawImage(IMAGES[this.type], this.frame * this.spriteWidth, this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x, this.y, this.spriteWidth, this.spriteHeight);
         ctx.fillStyle = '#f2e277';
         ctx.font = '20px Syne Tactile, cursive';
         // ctx.fillText(this.id, this.x + 40, this.y - 30)
-        ctx.fillText(Math.floor(this.hp), this.x + 65, this.y)
+        ctx.fillText(Math.floor(this.hp), this.x + 80, this.y - 10)
         // ctx.fillText(this.speed, this.x + 35, this.y + 110)
         // ctx.fillText(this.spawnRate, this.x + 35, this.y + 130)
         // ctx.fillText(Math.floor(this.x + 55), this.x + 30, this.y + 120)

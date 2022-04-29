@@ -1,5 +1,8 @@
 const Viking = require("../vikingtest.js")
 
+const runAnimation = ['mobs/viking1/0', 'mobs/viking1/1', 'mobs/viking1/2', 'mobs/viking1/3', 'mobs/viking1/4', 
+'mobs/viking1/5', 'mobs/viking1/6', 'mobs/viking1/7', 'mobs/viking1/8', 'mobs/viking1/9']
+
 class Viking1 extends Viking{
     constructor(wave){
         super(wave);
@@ -10,6 +13,8 @@ class Viking1 extends Viking{
         this.damage = 1;
         this.baseSpawnRate = 1000;
         this.spawnRate = 1000;
+        this.run = runAnimation;
+        this.animation = this.run;
     }
 
     waveScalar(){
