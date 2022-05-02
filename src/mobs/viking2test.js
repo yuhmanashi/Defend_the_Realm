@@ -1,24 +1,24 @@
-const Viking = require("../vikingtest.js");
-const Util = require("../util.js");
+const Viking = require("../vikingtest.js")
+const Util = require("../util.js")
 const canvas = document.getElementById('game-canvas');
 const ctx = canvas.getContext('2d');
 
-const runAnimation = ['mobs/viking1/0', 'mobs/viking1/1', 'mobs/viking1/2', 'mobs/viking1/3', 'mobs/viking1/4', 
-'mobs/viking1/5', 'mobs/viking1/6', 'mobs/viking1/7', 'mobs/viking1/8', 'mobs/viking1/9']
+const runAnimation = ['mobs/viking2/run/0', 'mobs/viking2/run/1', 'mobs/viking2/run/2', 'mobs/viking2/run/3', 'mobs/viking2/run/4',
+    'mobs/viking2/run/5', 'mobs/viking2/run/6', 'mobs/viking2/run/7', 'mobs/viking2/run/8', 'mobs/viking2/run/9']
 
 const IMAGES = [];
 
-class Viking1 extends Viking{
+class Viking2 extends Viking{
     constructor(wave){
         super(wave);
-        this.type = 0;
+        this.y = 200;
+        this.type = 1;
         this.hp = 6;
-        this.y = 200
-        this.speed = .2;
-        this.baseSpeed = .2;
-        this.damage = 1;
-        this.baseSpawnRate = 1000;
-        this.spawnRate = 1000;
+        this.speed = .1;
+        this.baseSpeed = .1;
+        this.damage = 2;
+        this.baseSpawnRate = 400;
+        this.spawnRate = 400;
         this.run = runAnimation;
         this.animation = this.run;
         this.frame = 0;
@@ -28,8 +28,8 @@ class Viking1 extends Viking{
         this.hp = Math.floor(this.hp + this.wave - 1);
         this.baseSpeed = this.baseSpeed + (this.wave * .01);
         this.speed = this.baseSpeed;
-        this.damage = Math.floor((this.damage + this.wave)/2);
-        this.baseSpawnRate = this.baseSpawnRate - (this.wave * 10);
+        this.damage = Math.floor((this.damage + this.wave)/2) + 1;
+        this.baseSpawnRate = this.baseSpawnRate - (this.wave * 15);
         this.spawnRate = this.baseSpawnRate;
         this.maxHP = this.hp;
     }
@@ -61,4 +61,4 @@ class Viking1 extends Viking{
     }
 }
 
-module.exports = Viking1;
+module.exports = Viking2;

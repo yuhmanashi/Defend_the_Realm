@@ -1,6 +1,6 @@
 const Viking1 = require("./mobs/viking1test.js");
-const Viking2 = require("./mobs/viking2.js");
-const Viking3 = require("./mobs/viking3.js");
+const Viking2 = require("./mobs/viking2test.js");
+const Viking3 = require("./mobs/viking3test.js");
 
 const canvas = document.getElementById('game-canvas');
 const ctx = canvas.getContext('2d');
@@ -20,14 +20,14 @@ class Mob {
         this.canvas.addEventListener(type, listener);
     }
 
-    // createMob(wave, speed){
-    //     let num = Math.floor(Math.random() * 3)
-    //     return num === 0 ? new Viking1(wave, speed) : num === 1 ? new Viking2(wave, speed) : new Viking3(wave, speed);
-    // }
-
     createMob(wave, speed){
-        return new Viking1(wave, speed)
+        let num = Math.floor(Math.random() * 3)
+        return num === 0 ? new Viking1(wave, speed) : num === 1 ? new Viking2(wave, speed) : new Viking3(wave, speed);
     }
+
+    // createMob(wave, speed){
+    //     return new Viking2(wave, speed)
+    // }
 
     checkSpeed(gameSpeed){
         MOBS.every(mob => {
