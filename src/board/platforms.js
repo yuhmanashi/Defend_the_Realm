@@ -1,4 +1,4 @@
-const Util = require('./util.js')
+const Util = require('../util.js')
 
 const canvas = document.getElementById('game-canvas');
 const ctx = canvas.getContext('2d');
@@ -18,12 +18,16 @@ class Platform {
         //this.boundsY = this.actualY - tower.y - tower.height * 2
     }
 
+    draw(){
+        ctx.drawImage(IMAGES[this.type], this.x, this.y);
+    }
+
     preloadPlatforms(callback) {
         Util.preloadImages(URLS, IMAGES, callback);
     }
 
-    draw(){
-        ctx.drawImage(IMAGES[this.type], this.x, this.y);
+    loadPlatforms(){
+        this.preloadPlatforms(this.draw.bind(this));
     }
 }
 
