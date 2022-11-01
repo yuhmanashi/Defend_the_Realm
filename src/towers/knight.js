@@ -1,7 +1,7 @@
-const Tower = require("../towers.js");
+const Tower = require("./tower.js");
 
 class Knight extends Tower{
-    constructor(x, y) {
+    constructor(x = 0, y = 0) {
         super(x, y)
         this.height = 39;
         this.type = 0;

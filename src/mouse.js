@@ -18,18 +18,34 @@ class Mouse {
 
     checkTower(event){
         this.recalcPos(event);
+        const tower = this.tower;
+        const game = this.game;
+        const towers = this.game.towers
+        
+        if (tower) {
+            tower.update(this.x, this.y);
+            towers.addTower(tower);
+            // if (!towers.takenPos.has(this.x) && this.x >= 120 && this.x <= 700) {
+            //     if (tower.validPos && tower.checkMoney(player)) {
+            //         towers.takenPos.add(this.x);
+            //         if (this.y <= (300 + 10) && this.y >= 300 - 150){
+            //             tower.update(this.x, (300 - 35));
+            //             towers.addTower(tower);
+            //             tower.payCost(player);
+            //             tower.manageTowers();
+            //         }
+            //     }
+            // };
+    
+            this.resetTower();
+        }
+
         if (this.x >= 44 && this.x <= 93 && this.y >= 490 && this.y <= 585) {
-            // this.tower = new Knight(this.x, this.y);
-            this.tower = 0;
-            console.log(this.tower)
+            this.tower = towers.createTower(0);
         } else if (this.x >= 124 && this.x <= 172 && this.y >= 490 && this.y <= 585){
-            // this.tower = new Archer(this.x, this.y);
-            this.tower = 1;
-            console.log(this.tower)
+            this.tower = towers.createTower(1);
         } else if (this.x >= 205 && this.x <= 250 && this.y >= 490 && this.y <= 585){
-            // this.tower = new Wizard(this.x, this.y);
-            this.tower = 2;
-            console.log(this.tower)
+            this.tower = towers.createTower(2);
         }
     }
 
@@ -64,7 +80,7 @@ class Mouse {
     placeTower(){
         if (mouse.tower) {
             mouse.tower.update(mouse.x, mouse.y);
-            if (!taken.includes(mouse.x) && mouse.x >= 120 && mouse.x <= 700) {
+            if (!game.taken.has(this.x) && mouse.x >= 120 && mouse.x <= 700) {
                     // for (let i = mouse.x - 60; i < mouse.x + 60; i++) {
                     //     taken.push(i);
                     // }

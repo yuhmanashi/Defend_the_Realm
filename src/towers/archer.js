@@ -1,7 +1,7 @@
-const Tower = require("../towers.js");
+const Tower = require("./tower.js");
 
 class Archer extends Tower{
-    constructor(x, y) {
+    constructor(x = 0, y = 0) {
         super(x, y)
         this.type = 1;
         this.color = 'green';

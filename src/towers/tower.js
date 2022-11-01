@@ -1,4 +1,4 @@
-const Util = require("./util.js")
+const Util = require("../util.js")
 
 const canvas = document.getElementById('game-canvas');
 const ctx = canvas.getContext('2d');
@@ -6,7 +6,7 @@ const ctx = canvas.getContext('2d');
 const URLS = ['towers/base/knightbase120', 'towers/base/archerbase120', 'towers/base/icewizardbase120'];
 const IMAGES = [];
 
-const TOWERS = [];
+// const TOWERS = [];
 const ATTACKS = {};
 
 class Tower {
@@ -56,24 +56,31 @@ class Tower {
         return a > b ? 1 : -1
     }
 
-    sortedTowers(){
-        return TOWERS.sort(function(a, b) {
+    sortedTowers(towers){
+        // return TOWERS.sort(function(a, b) {
+        //     return a.x - b.x
+        // })
+        towers.sort(function(a,b){
             return a.x - b.x
         })
     }
 
-    manageTowers(vikings, frame, gameSpeed){
-        this.changeSpeed(gameSpeed)
-        const towers = this.sortedTowers();
-        for (let i = 0; i < towers.length; i++){
-            if (Math.floor(frame) % Math.floor(towers[i].speed) === 0) {
-                let enemies = towers[i].findEnemies(vikings);
-                if (enemies instanceof Array) {
-                    towers[i].addAttack(enemies);
-                };
-            }
-            towers[i].updateFrame(frame);
-            towers[i].preloadTower(towers[i].draw.bind(towers[i]));
+    manageTowers(towers){
+        // this.changeSpeed(gameSpeed)
+        // const towers = this.sortedTowers();
+        // for (let i = 0; i < towers.length; i++){
+        //     if (Math.floor(frame) % Math.floor(towers[i].speed) === 0) {
+        //         let enemies = towers[i].findEnemies(vikings);
+        //         if (enemies instanceof Array) {
+        //             towers[i].addAttack(enemies);
+        //         };
+        //     }
+        //     towers[i].updateFrame(frame);
+        //     towers[i].preloadTower(towers[i].draw.bind(towers[i]));
+        // }
+        const sorted = this.sortedTowers(towers);
+        for (let tower of sorted){
+            tower[i].preloadTower(tower[i].draw.bind(tower[i]));
         }
     }
 
@@ -121,6 +128,10 @@ class Tower {
     updateSpeed(gameSpeed){
         this.speed = this.baseSpeed / gameSpeed;
         // this.spawnRate = this.baseSpawnRate * gameSpeed;
+    }
+
+    checkPos(){
+        
     }
 }
 

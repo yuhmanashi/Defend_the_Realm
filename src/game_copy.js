@@ -5,7 +5,7 @@ const Knight = require('./towers/knight.js')
 const Wizard = require('./towers/wizard.js');
 const Archer = require('./towers/archer.js');
 const Mob = require('./mobs.js');
-const Tower = require('./towers.js');
+const Tower = require('./towers/tower.js');
 const Player = require('./player.js');
 const Platform = require('./board/platforms.js');
 
