@@ -163,15 +163,21 @@
 const Test = require('./test');
 const Board = require('./board/board');
 const Display = require('./board/display');
-const Mouse = require('./newMouse');
+const Mouse = require('./mouse');
+const Player = require('./player');
+const Tower = require('./towers');
+const Mob = require('./mobs');
 
 class Game{
     constructor(){
         this.board = new Board();
         this.test = new Test();
         this.display = new Display(this.board);
-        this.mouse = new Mouse(this.board);
-        
+        this.mouse = new Mouse(this.board, this);
+        this.player = new Player();
+        this.tower = new Tower(0, 0);
+        this.mob = new Mob();
+
         this.frame = 0;
         this.animationOn = false;
         this.gameOver = false;
@@ -188,19 +194,39 @@ class Game{
         })
     }
 
+    toggleAnimation(){
+        this.animationOn ? this.animationOn = false : this.animationOn = true;
+    }
+
     animate(){
-        const board = this.board;
-        const display = this.display;
-        const mouse = this.mouse;
-        if (board.state === 0){
-            display.loadSplash();
-            board.addEventListener('click', e => {mouse.selectMode(e)})
-        } else if (board.state === 1){
-            display.loadGameMode1();
-            board.addEventListener('click', e => {mouse.checkTower(e)})
-        } else if (board.state === 2){
-            display.loadGameMode1();
-            board.addEventListener('click', e => {mouse.checkTower(e)})
+        if (this.player.winGame) {
+            this.animationOn = false;
+            this.mouse.x = 0;
+            this.display.loadWin();
+        } else if (!this.animationOn) {
+            if (this.gameOver) {
+                this.modeSelected = false;
+                this.display.loadGameOver();
+            }
+        }
+
+        if (this.animationOn) {
+            this.board.ctx.clearRect(0, 0, 0, 0)
+            this.display.loadGameMode1();
+            this.player.draw(1);
+
+            if (this.player.hp < 1) {
+                this.animationOn = false;
+                this.gameOver = true;
+                this.mouse.x = 0;
+            }
+
+            if (this.player.hp > 0) {
+                this.tower.manageTowers(this.mob.currentMobs(), this.frame, 1);
+                this.mob.manageMobs(this.player, this.tower.currentAttacks(), this.frame, 1);
+            }
+
+            this.frame++;
         }
 
         requestAnimationFrame(this.animate.bind(this));
@@ -210,7 +236,16 @@ class Game{
         this.display.draw();
     }
 
+
+
     start(){
+        const board = this.board;
+        const display = this.display;
+        const mouse = this.mouse;
+
+        display.loadSplash();
+        board.addEventListener('click', e => {mouse.selectMode(e)})
+
         this.animate();
     }
 }
