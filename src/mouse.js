@@ -12,6 +12,10 @@ class Mouse {
     addEventListener(type, listener){
         this.canvas.addEventListener(type, listener);
     }
+    
+    removeEventListener(type, listener){
+        this.canvas.removeEventListener(type, listener);
+    }
 
     checkRange(x1, x2, range){
         if (x1 <= x2 - range || x1 >= x2 + range) return true;

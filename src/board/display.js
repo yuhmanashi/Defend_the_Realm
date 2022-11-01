@@ -1,5 +1,6 @@
 const Platform = require('./platforms.js');
 const Util = require('../util');
+const Player = require('../player.js');
 
 const backgroundURLs = ['background/forest', 'misc/play250x83', 'misc/scroll3', 'misc/exit', 'misc/endless'];
 const backgrounds = [];
@@ -94,7 +95,7 @@ class Display {
     }
     
     loadLose(){
-        this.preloadBackgrounds(backgroundURLs, backgrounds, this.renderGameOver);
+        Util.preloadImages(backgroundURLs, backgrounds, this.renderLose);
     }
 
     //win
@@ -131,6 +132,9 @@ class Display {
 
     //splash
     renderSplash() {
+        const canvas = this.board.canvas;
+        const ctx = this.board.ctx;
+
         ctx.drawImage(backgrounds[0], 0, 0, canvas.width, canvas.height);
         ctx.drawImage(backgrounds[1], (canvas.width/3) + 10, (canvas.height/2) + 20);
         ctx.drawImage(backgrounds[2], 205, (canvas.height/5) - 70);
@@ -149,11 +153,24 @@ class Display {
     }
 
     loadSplash() {
-        this.preloadBackgrounds(backgroundURLs, backgrounds, this.renderSplash)
+        Util.preloadImages(backgroundURLs, backgrounds, this.renderSplash)
+    }
+
+    loadGameMode1(){
+        this.board.ctx.clearRect(0, 0, 0, 0)
+        this.loadBackground();
+        this.loadPortals();
+        this.loadHUD();
+    }
+
+    animate(){
+        this.loadGameMode1();
+        frame++;
+        requestAnimationFrame(this.animate.bind(this));
     }
 
     draw(){
-        this.loadLose();
+        
     }
 }
 

@@ -163,12 +163,19 @@
 const Test = require('./test');
 const Board = require('./board/board');
 const Display = require('./board/display');
+const Mouse = require('./newMouse');
 
 class Game{
     constructor(){
         this.board = new Board();
         this.test = new Test();
         this.display = new Display(this.board);
+        this.mouse = new Mouse(this.board);
+        
+        this.frame = 0;
+        this.animationOn = false;
+        this.gameOver = false;
+        this.gameMode = 0;
     }
 
     clickEvent(){
@@ -181,12 +188,30 @@ class Game{
         })
     }
 
+    animate(){
+        const board = this.board;
+        const display = this.display;
+        const mouse = this.mouse;
+        if (board.state === 0){
+            display.loadSplash();
+            board.addEventListener('click', e => {mouse.selectMode(e)})
+        } else if (board.state === 1){
+            display.loadGameMode1();
+            board.addEventListener('click', e => {mouse.checkTower(e)})
+        } else if (board.state === 2){
+            display.loadGameMode1();
+            board.addEventListener('click', e => {mouse.checkTower(e)})
+        }
+
+        requestAnimationFrame(this.animate.bind(this));
+    }
+
     check(){
         this.display.draw();
     }
 
     start(){
-        this.check();
+        this.animate();
     }
 }
 

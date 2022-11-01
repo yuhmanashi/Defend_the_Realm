@@ -1,6 +1,3 @@
-const Util = require('../util');
-const Map = require('./display');
-
 const canvas = document.getElementById('game-canvas');
 const ctx = canvas.getContext('2d');
 canvas.width = 800;
@@ -12,10 +9,29 @@ class Board {
         this.ctx = ctx;
         this.offsetX = 0;
         this.offsetY = 0;
+
+        this.state = 0;
+        //0 - splash 1 - classic 2 - endless
+    }
+
+    setState(state){
+        this.state = state;
+    }
+
+    checkState(){
+
+    }
+
+    splash(){
+
     }
 
     addEventListener(type, listener){
         this.canvas.addEventListener(type, listener);
+    }
+
+    removeEventListener(type, listener){
+        this.canvas.removeEventListener(type, listener);
     }
 
     offsetRecalc(){
