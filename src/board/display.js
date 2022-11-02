@@ -160,6 +160,7 @@ class Display {
         this.board.ctx.clearRect(0, 0, 0, 0)
         this.loadBackground();
         this.platform.loadPlatforms();
+        
         this.loadPortals();
         this.loadHUD();
     }

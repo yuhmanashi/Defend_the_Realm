@@ -22,13 +22,26 @@ class Platform {
         ctx.drawImage(IMAGES[this.type], this.x, this.y);
     }
 
-    preloadPlatforms(callback) {
-        Util.preloadImages(URLS, IMAGES, callback);
+    loadPlatforms(){
+        Util.preloadImages(URLS, IMAGES, this.draw.bind(this));
     }
 
-    loadPlatforms(){
-        this.preloadPlatforms(this.draw.bind(this));
-    }
+    // platformBounds(){
+    //     ctx.beginPath();
+    //     for (let i = 100; i <= 700; i += 60){
+    //         ctx.moveTo(i, this.y);
+    //         ctx.lineTo(i, this.upperY);
+    //         ctx.stroke();
+    //     }
+    // }
+
+    // bounds(){
+    //     const bounds = {};
+    //     for (let i = 0; i <= 10; i++){
+    //         bounds[i] = i * 60; 
+    //     }
+    //     return bounds;
+    // }
 }
 
 module.exports = Platform;

@@ -16,15 +16,32 @@ class Mouse {
         this.y = event.y - this.board.offsetY;
     }
 
+    adjustPos(){
+        //100-700
+        let x = this.x - 100;
+        x = x - (x % 60);
+        this.x = x + 100;
+    }
+
     checkTower(event){
         this.recalcPos(event);
         const tower = this.tower;
         const game = this.game;
         const towers = this.game.towers
-        
+
         if (tower) {
+            this.adjustPos();
             tower.update(this.x, this.y);
-            towers.addTower(tower);
+            
+            if (!towers.takenPos.has(this.x) && this.x >= 100 && this.x <= 700){ //x-bounds
+                if (this.y <= (300 + 10) && this.y >= 300 - 150){ //
+                    tower.update(this.x, (300 - 35));
+                    towers.takenPos.add(this.x);
+                    towers.addTower(tower);
+                    this.resetTower();
+                }
+            }
+
             // if (!towers.takenPos.has(this.x) && this.x >= 120 && this.x <= 700) {
             //     if (tower.validPos && tower.checkMoney(player)) {
             //         towers.takenPos.add(this.x);
@@ -36,8 +53,6 @@ class Mouse {
             //         }
             //     }
             // };
-    
-            this.resetTower();
         }
 
         if (this.x >= 44 && this.x <= 93 && this.y >= 490 && this.y <= 585) {
