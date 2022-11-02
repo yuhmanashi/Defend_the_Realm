@@ -18,12 +18,12 @@ class Player {
         this.mode = 0;
     }
 
-    draw(speed){
+    draw(){
         ctx.fillStyle = 'white';
         ctx.font = '50px Architects Daughter, cursive';
         ctx.fillText(`Wave: ${this.wave}/${this.maxWave}`, 20, 50);
         ctx.fillText(`Enemies: ${this.mobsDeath}/${this.mobsCount}`, 450, 50)
-        ctx.fillText(`Speed: ${speed}x`, 450, 100);
+        // ctx.fillText(`Speed: ${speed}x`, 450, 100);
         if (this.mode === 1) {
             ctx.fillText(`Score: ${this.score}`, 20, 110);
         }
@@ -38,16 +38,12 @@ class Player {
         this.hp -= num;
     }
 
-    getMoney(num){
+    editMoney(num){
         this.money += num;
     }
 
     addWave(){
         this.wave += 1;
-    }
-
-    waveCount(){
-        return this.wave;
     }
 
     addMob(){
@@ -82,16 +78,12 @@ class Player {
         this.score += score;
     }
 
-    playerScore(){
-        return this.score;
-    }
-
-    checkMoney(towerCost){
-        if (this.money > 0 && this.money - towerCost >= 0){
+    checkMoney(cost){
+        if (this.money - cost >= 0){
             return true;
-        } else {
-            return false;
-        }
+        } 
+        
+        return false;
     }
 }
 

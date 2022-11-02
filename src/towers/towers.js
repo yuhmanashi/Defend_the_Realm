@@ -46,11 +46,18 @@ class Towers {
         Util.preloadImages(URLS, IMAGES, this.drawTowers);
     }
 
-    // manageTowers(){
-    //     for (let tower of this.towers){
-    //         this.loadTower(tower);
-    //     }
-    // }
+    manageTowers(vikings, frame){
+        for (let tower of towers){
+            if (Math.floor(frame) % Math.floor(tower.speed) === 0) {
+                let enemies = tower.findEnemies(vikings);
+                if (enemies instanceof Array) {
+                    tower.addAttack(enemies);
+                };
+            }
+            
+            tower.updateFrame(frame);
+        }
+    }
 }
 
 module.exports = Towers;
