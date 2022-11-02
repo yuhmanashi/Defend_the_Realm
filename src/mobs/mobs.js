@@ -7,12 +7,14 @@ let gameSpeed = 1;
 class Mobs {
     constructor() {
         this.hp = 0;
-        this.mobs = [];
+        this.mobs = {};
+        this.mobCount = 0;
     }
 
     createMob(wave){
+        this.mobCount++;
         let type = Math.floor(Math.random() * 3)
-        return type === 0 ? new Viking1(wave) : type === 1 ? new Viking2(wave) : new Viking3(wave);
+        return type === 0 ? new Viking1(wave, this.mobCount) : type === 1 ? new Viking2(wave, this.mobCount) : new Viking3(wave, this.mobCount);
     }
 
     manageMobs(player, frame){
@@ -24,11 +26,12 @@ class Mobs {
         //         player.waveOver = false;
         //     }
         // }
+        const mobs = this.mobs;
         let mob = this.createMob(player.wave);
         if (player.wave > 1) mob.waveScalar();
 
-        if (Math.floor(frame) % Math.floor(mob.spawnRate) === 0 && this.mobs.length < player.mobsCount){
-            this.mobs.push(mob);
+        if (Math.floor(frame) % Math.floor(mob.spawnRate) === 0 && Object.keys(mobs).length < player.mobsCount){
+            mobs[mob.id] = mob;
         }
 
         // Object.keys(attacks).forEach(el => {
@@ -37,20 +40,18 @@ class Mobs {
         //     delete(attacks[el]);
         // });
 
-        for (let i = 0; i < this.mobs.length; i++){
-            const mob = this.mobs[i];
-            mob.update(i, frame)
-            mob.preload(mob.draw.bind(mob));
+        for (let id in mobs){
+            const mob = this.mobs[id];
+            mob.update(frame)
+            mob.preload();
             if (mob.x >= 670) {
                 player.loseHP(mob.damage);
-                this.mobs.splice(i, 1);
-                i--;
+                delete mobs[id];
             } else if (mob.hp < 1) {
                 if (player.endless()) player.addScore(mob.maxHP);
                 player.editMoney(mob.type + 1 + player.waveCount());
                 player.addMob();
-                this.mobs.splice(i, 1);
-                i--;
+                delete mobs[id]
             }
         }
 

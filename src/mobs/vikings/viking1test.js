@@ -1,4 +1,4 @@
-const Viking = require("../../vikingtest.js");
+const Viking = require("./vikingtest.js");
 const Util = require("../../util.js");
 const canvas = document.getElementById('game-canvas');
 const ctx = canvas.getContext('2d');
@@ -9,8 +9,8 @@ const runAnimation = ['mobs/viking1/0', 'mobs/viking1/1', 'mobs/viking1/2', 'mob
 const IMAGES = [];
 
 class Viking1 extends Viking{
-    constructor(wave){
-        super(wave);
+    constructor(wave, id){
+        super(wave, id);
         this.type = 0;
         this.hp = 6;
         this.y = 200
@@ -34,8 +34,8 @@ class Viking1 extends Viking{
         this.maxHP = this.hp;
     }
 
-    preload(callback){
-        Util.preloadImages(this.animation, IMAGES, callback);
+    preload(){
+        Util.preloadImages(this.animation, IMAGES, this.draw.bind(this));
     }
 
     draw(){

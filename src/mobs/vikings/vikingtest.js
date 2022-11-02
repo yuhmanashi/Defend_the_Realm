@@ -5,9 +5,9 @@ const IMAGES = [];
 const VIKINGS = [];
 
 class Viking {
-    constructor(wave) {
+    constructor(wave, id) {
         this.wave = wave;
-        this.id = 0;
+        this.id = id;
         this.type = 0;
         this.x = 30; // start = platform.x - 20;
         this.y = 225; // y = platform.y - 100;
@@ -27,14 +27,13 @@ class Viking {
         this.animation = [];
     }
 
-    update(index, frame){
+    update(frame){
         this.frame = Math.floor((frame / 3) % 10);
         
         if (this.x <= 670) {
             this.x += this.speed; // .5
             this.posX = this.x + 55;
         }
-        if (this.id !== index) this.id = index;
     }
 
     // preload(callback){
@@ -45,10 +44,6 @@ class Viking {
     //     ctx.fillStyle = 'red';
     //     ctx.fillRect(this.x, this.y, this.width, this.height);
     // }
-
-    addEventListener(type, listener){
-        this.canvas.addEventListener(type, listener);
-    }
 
     // manage(player, attacks, frame){
     //     if (frame % this.spawnrate === 0) {
