@@ -51,7 +51,7 @@ class Towers {
     testTowers(mobs, frame){
         for (let pos in this.towers){
             const tower = this.towers[pos];
-            if (Math.floor(frame) % Math.floor(tower.speed) === 0) tower.testAttack(mobs);
+            if (Math.floor(frame) % Math.floor(tower.speed) === 0) tower.attack(mobs);
             tower.updateFrame(frame);
         }
     }

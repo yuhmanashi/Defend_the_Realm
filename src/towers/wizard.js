@@ -12,22 +12,34 @@ class Wizard extends Tower{
         this.cost = 100;
     }
 
-    attackInfo(){
-        return [this.pos, this.range, 1]
-    }
+    mobsInRange(mobs){
+        const min = this.x - this.range;
+        const max = this.x + this.range;
+        const inRange = [];
 
-    findEnemies(enemies){
-        let enemyIDs = [];
-        
-        for (let i = 0; i < enemies.length; i++) {
-            let id = enemies[i].currentInfo()[0];
-            let posX = enemies[i].currentInfo()[1];
-            if (posX > this.x - this.range && posX <= this.x + 70) {           
-                enemyIDs.push(id);
+        for (let id in mobs){
+            const mob = mobs[id];
+            if (mob.x >= min && mob.x <= max){
+                inRange.push(mob);
             }
         }
 
-        return enemyIDs.length ? enemyIDs : 0;
+        return inRange;
+    }
+
+    attack(mobs){
+        //hits all around the mob in middle of range
+        const inRange = this.mobsInRange(mobs);
+        if (inRange.length === 0) return;
+
+        const mid = Math.floor(inRange.length / 2);
+        const target = inRange[mid];
+        const targetMin = target.x - this.range;
+        const targetMax = target.x + this.range;
+
+        for (let mob of inRange){
+            if (mob.x >= targetMin && mob.x <= targetMax) mob.loseHP(this.damage);
+        }
     }
 }
 

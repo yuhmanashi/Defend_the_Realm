@@ -28,7 +28,8 @@ class Knight extends Tower{
         return inRange;
     }
 
-    testAttack(mobs){
+    attack(mobs){
+        //hits all in range
         const inRange = this.mobsInRange(mobs);
         for (let mob of inRange){
             mob.loseHP(this.damage)
