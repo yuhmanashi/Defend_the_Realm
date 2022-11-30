@@ -26,12 +26,6 @@ class Towers {
             return new Wizard();
         }
     }
-
-    // sortedTowers(){
-    //     this.towers.sort(function(a,b){
-    //         return a.x - b.x
-    //     })
-    // }
     
     addTower(pos,tower){
         this.towers[pos] = tower
@@ -48,7 +42,7 @@ class Towers {
         Util.preloadImages(URLS, IMAGES, this.drawTowers);
     }
 
-    testTowers(mobs, frame){
+    attack(mobs, frame){
         for (let pos in this.towers){
             const tower = this.towers[pos];
             if (Math.floor(frame) % Math.floor(tower.speed) === 0) tower.attack(mobs);
