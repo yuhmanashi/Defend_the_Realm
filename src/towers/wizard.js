@@ -5,7 +5,7 @@ class Wizard extends Tower{
         super(x, y)
         this.type = 2;
         this.color = 'blue';
-        this.range = 300;
+        this.range = 300; // 60 * 5
         this.damage = 4;
         this.speed = 1100;
         this.baseSpeed = 1100;

@@ -8,6 +8,7 @@ class Mouse {
         this.tower = null;
 
         this.recalcPos = this.recalcPos.bind(this);
+        this.splashListener = this.splashListener.bind(this);
     }
 
     recalcPos(event){
@@ -43,7 +44,7 @@ class Mouse {
                 if (this.y <= (300 + 10) && this.y >= 300 - 150){ //
                     tower.update(this.x, (300 - 35));
                     towers.takenPos.add(this.x);
-                    towers.addTower(tower);
+                    towers.addTower(this.x, tower);
                     player.editMoney(-(tower.cost));
                     this.changeTower();
                 }
@@ -72,16 +73,13 @@ class Mouse {
         
         const addNextListeners = () => {
             this.game.toggleAnimation();
-            board.removeEventListener('click', e => {this.splashListener(e)});
             board.addEventListener('click', e => {this.towerListener(e)});
         }
 
         if (this.x >= 273 && this.x <= 525 && this.y >= 321 && this.y <= 395) {
-            console.log('Classic')
             board.setState(1)
             addNextListeners();
         } else if (this.x >= 273 && this.x <= 525 && this.y >= 448 && this.y <= 523) {
-            console.log('Endless')
             board.setState(2)
             addNextListeners();
         }

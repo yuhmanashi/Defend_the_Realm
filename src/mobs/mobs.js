@@ -9,6 +9,8 @@ class Mobs {
         this.hp = 0;
         this.mobs = {};
         this.mobCount = 0;
+        this.currentMobs = 0;
+        this.attacks = {};
     }
 
     createMob(wave){
@@ -26,12 +28,14 @@ class Mobs {
         //         player.waveOver = false;
         //     }
         // }
+
         const mobs = this.mobs;
         let mob = this.createMob(player.wave);
         if (player.wave > 1) mob.waveScalar();
 
-        if (Math.floor(frame) % Math.floor(mob.spawnRate) === 0 && Object.keys(mobs).length < player.mobsCount){
+        if (Math.floor(frame) % Math.floor(mob.spawnRate) === 0 && this.currentMobs < player.mobsCount){
             mobs[mob.id] = mob;
+            this.currentMobs++;
         }
 
         // Object.keys(attacks).forEach(el => {
@@ -47,14 +51,30 @@ class Mobs {
             if (mob.x >= 670) {
                 player.loseHP(mob.damage);
                 delete mobs[id];
+                this.currentMobs--;
             } else if (mob.hp < 1) {
                 if (player.endless()) player.addScore(mob.maxHP);
                 player.editMoney(mob.type + 1 + player.waveCount());
                 player.addMob();
                 delete mobs[id]
+                this.currentMobs--;
             }
         }
 
+    }
+
+    mobPositions(){
+        const positions = {};
+        for (let id in mobs){
+            positions[id] = mobs[id].x;
+        }
+        return positions
+    }
+
+    attackMobs(){
+        for (let id in mobs){
+            mobs[id].loseHP(this.attacks[id].damage);
+        }
     }
 
     currentMobs(){

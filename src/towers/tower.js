@@ -6,9 +6,6 @@ const ctx = canvas.getContext('2d');
 const URLS = ['towers/base/knightbase120', 'towers/base/archerbase120', 'towers/base/icewizardbase120'];
 const IMAGES = [];
 
-// const TOWERS = [];
-const ATTACKS = {};
-
 class Tower {
     constructor(x, y) {
         this.type = null;
@@ -21,6 +18,8 @@ class Tower {
         this.range = 0;
         this.damage = 0;
         this.speed = 0;
+
+        this.attacks = {};
     }
 
     update(x, y){
@@ -91,14 +90,6 @@ class Tower {
         })
     }
 
-    currentTowers(){
-        return TOWERS;
-    }
-
-    currentAttacks(){
-        return ATTACKS;
-    }
-
     checkMoney(player){
         if (player.money > 0 && player.money - this.cost >= 0){
             return true;
@@ -132,6 +123,10 @@ class Tower {
 
     checkPos(){
         
+    }
+
+    pingAttack(){
+        return `attack at ${this.x}`
     }
 }
 

@@ -73,10 +73,11 @@ class Game {
             if (this.player.hp < 1) {
                 this.animationOn = false;
                 this.display.loadLose();
+                this.board.addEventListener('click', e => {this.mouse.refreshListener(e)})
             }
 
             if (this.player.hp > 0) {
-                
+                this.towers.testTowers(this.frame);
                 // this.tower.manageTowers(this.mob.currentMobs(), this.frame);
                 this.mobs.manageMobs(this.player, this.frame);
             }
@@ -93,7 +94,7 @@ class Game {
         const mouse = this.mouse;
 
         display.loadSplash();
-        board.addEventListener('click', e => {mouse.splashListener(e)})
+        board.addEventListener('click', e => {mouse.splashListener(e)}, {once: true})
 
         this.animate();
     }

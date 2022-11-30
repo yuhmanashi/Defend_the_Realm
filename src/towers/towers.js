@@ -10,10 +10,11 @@ const IMAGES = [];
 class Towers {
     constructor(board){
         this.board = board;
-        this.towers = [];
+        this.towers = {};
         this.takenPos = new Set();
 
         this.drawTowers = this.drawTowers.bind(this);
+        this.attacks = {};
     }
 
     createTower(type){
@@ -26,18 +27,19 @@ class Towers {
         }
     }
 
-    sortedTowers(){
-        this.towers.sort(function(a,b){
-            return a.x - b.x
-        })
-    }
+    // sortedTowers(){
+    //     this.towers.sort(function(a,b){
+    //         return a.x - b.x
+    //     })
+    // }
     
-    addTower(tower){
-        this.towers.push(tower)
+    addTower(pos,tower){
+        this.towers[pos] = tower
     }
 
     drawTowers(){
-        for (let tower of this.towers){
+        for (let pos in this.towers){
+            const tower = this.towers[pos];
             this.board.ctx.drawImage(IMAGES[tower.type], tower.x, tower.y);
         }
     }
@@ -46,17 +48,27 @@ class Towers {
         Util.preloadImages(URLS, IMAGES, this.drawTowers);
     }
 
-    manageTowers(vikings, frame){
+    manageTowers(mobs, frame){
+        const attacks = {};
+        
         for (let tower of towers){
-            if (Math.floor(frame) % Math.floor(tower.speed) === 0) {
-                let enemies = tower.findEnemies(vikings);
-                if (enemies instanceof Array) {
-                    tower.addAttack(enemies);
-                };
-            }
-            
+            if (Math.floor(frame) % Math.floor(tower.speed) === 0) tower.pingAttack();
+
             tower.updateFrame(frame);
         }
+
+        this.attacks = attacks;
+    }
+
+    testTowers(frame){
+        const attacks = [];
+        for (let pos in this.towers){
+            const tower = this.towers[pos];
+            if (Math.floor(frame) % Math.floor(tower.speed) === 0) attacks.push(pos);
+            tower.updateFrame(frame);
+        }
+        
+        if (attacks.length > 0) console.log(attacks, frame);
     }
 }
 

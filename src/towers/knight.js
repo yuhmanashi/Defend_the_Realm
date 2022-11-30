@@ -6,7 +6,7 @@ class Knight extends Tower{
         this.height = 39;
         this.type = 0;
         this.color = 'orange';
-        this.range = -10;
+        this.range = 30; //60 / 2
         this.damage = 2;
         this.speed = 400;
         this.baseSpeed = 400;

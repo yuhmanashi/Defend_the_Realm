@@ -1,13 +1,13 @@
-const Util = require('./util.js');
-const Mouse = require('./mouse.js');
+const Util = require('../util.js');
+const Mouse = require('../mouse.js');
 const Map = require('./board/map.js');
-const Knight = require('./towers/knight.js')
-const Wizard = require('./towers/wizard.js');
-const Archer = require('./towers/archer.js');
-const Mob = require('./mobs/mobs.js');
-const Tower = require('./towers/tower.js');
-const Player = require('./player.js');
-const Platform = require('./board/platforms.js');
+const Knight = require('../towers/knight.js')
+const Wizard = require('../towers/wizard.js');
+const Archer = require('../towers/archer.js');
+const Mob = require('../mobs/mobs.js');
+const Tower = require('../towers/tower.js');
+const Player = require('../player.js');
+const Platform = require('../board/platforms.js');
 
 const platform = new Platform(2, 50, 300);
 

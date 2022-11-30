@@ -5,7 +5,7 @@ const ctx = canvas.getContext('2d');
 
 class Player {
     constructor(){
-        this.hp = 20;
+        this.hp = 1;
         this.maxHP = this.hp;
         this.money = 200;
         this.wave = 1;

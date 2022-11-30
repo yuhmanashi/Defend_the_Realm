@@ -5,13 +5,15 @@ class Archer extends Tower{
         super(x, y)
         this.type = 1;
         this.color = 'green';
-        this.range = 250;
+        this.range = 240; //60 * 4 
         this.damage = 2;
         this.speed = 300;
         this.baseSpeed = 300;
         this.cost = 50;
     }
 
+    //single attack
+    //hits closest target
     findEnemies(enemies){
         let enemyIDs = [];
         if (enemyIDs.length !== 1) {
@@ -24,6 +26,10 @@ class Archer extends Tower{
             }
         }
         return enemyIDs.length ? enemyIDs : 0;
+    }
+
+    closestEnemy(mobs){
+        
     }
 }
 

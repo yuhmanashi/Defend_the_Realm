@@ -71,7 +71,6 @@ class Viking {
     //     }
 
     // }
-
     currentVikings(){
         return VIKINGS;
     }
@@ -82,14 +81,6 @@ class Viking {
 
     loseHP(num){
         this.hp -= num;
-    }
-
-    currentImages(){
-        return IMAGES;
-    }
-
-    currentURLS(){
-        return URLS;
     }
 
     updateSpeed(gameSpeed){

@@ -26,12 +26,12 @@ class Board {
 
     }
 
-    addEventListener(type, listener){
-        this.canvas.addEventListener(type, listener);
+    addEventListener(type, listener, options = false){
+        this.canvas.addEventListener(type, listener, options);
     }
 
-    removeEventListener(type, listener){
-        this.canvas.removeEventListener(type, listener);
+    removeEventListener(type, listener, options = false){
+        this.canvas.removeEventListener(type, listener, options);
     }
 
     offsetRecalc(){
