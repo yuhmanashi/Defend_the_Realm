@@ -48,18 +48,6 @@ class Towers {
         Util.preloadImages(URLS, IMAGES, this.drawTowers);
     }
 
-    manageTowers(mobs, frame){
-        const attacks = {};
-        
-        for (let tower of towers){
-            if (Math.floor(frame) % Math.floor(tower.speed) === 0) tower.pingAttack();
-
-            tower.updateFrame(frame);
-        }
-
-        this.attacks = attacks;
-    }
-
     testTowers(mobs, frame){
         for (let pos in this.towers){
             const tower = this.towers[pos];

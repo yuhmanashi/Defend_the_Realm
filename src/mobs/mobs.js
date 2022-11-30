@@ -38,12 +38,6 @@ class Mobs {
             this.currentMobs++;
         }
 
-        // Object.keys(attacks).forEach(el => {
-        //     let totalDMG = attacks[el].reduce((a, b) => a + b);
-        //     MOBS[el].loseHP(totalDMG);
-        //     delete(attacks[el]);
-        // });
-
         for (let id in mobs){
             const mob = this.mobs[id];
             mob.update(frame)
@@ -60,24 +54,6 @@ class Mobs {
                 this.currentMobs--;
             }
         }
-    }
-
-    mobPositions(){
-        const positions = {};
-        for (let id in this.mobs){
-            positions[id] = this.mobs[id].x;
-        }
-        return positions
-    }
-
-    attackMobs(){
-        for (let id in mobs){
-            mobs[id].loseHP(this.attacks[id].damage);
-        }
-    }
-
-    currentMobs(){
-        return MOBS;
     }
 }
 

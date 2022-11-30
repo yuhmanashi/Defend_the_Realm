@@ -34,20 +34,6 @@ class Knight extends Tower{
             mob.loseHP(this.damage)
         }
     }
-
-    findEnemies(enemies){
-        let enemyIDs = [];
-        
-        for (let i = 0; i < enemies.length; i++) {
-            let id = enemies[i].currentInfo()[0];
-            let posX = enemies[i].currentInfo()[1];
-            if (posX > this.x - this.range && posX <= this.x + 120) {           
-                enemyIDs.push(id);
-            }
-        }
-
-        return enemyIDs.length ? enemyIDs : 0;
-    }
 }
 
 module.exports = Knight;
