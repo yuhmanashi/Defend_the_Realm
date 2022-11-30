@@ -77,7 +77,7 @@ class Game {
             }
 
             if (this.player.hp > 0) {
-                this.towers.testTowers(this.frame);
+                this.towers.testTowers(this.mobs.mobs, this.frame);
                 // this.tower.manageTowers(this.mob.currentMobs(), this.frame);
                 this.mobs.manageMobs(this.player, this.frame);
             }

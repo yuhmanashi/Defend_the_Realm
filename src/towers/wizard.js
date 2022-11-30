@@ -12,6 +12,10 @@ class Wizard extends Tower{
         this.cost = 100;
     }
 
+    attackInfo(){
+        return [this.pos, this.range, 1]
+    }
+
     findEnemies(enemies){
         let enemyIDs = [];
         

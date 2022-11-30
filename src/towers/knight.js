@@ -13,6 +13,28 @@ class Knight extends Tower{
         this.cost = 50;
     }
 
+    mobsInRange(mobs){
+        const min = this.x - this.range;
+        const max = this.x + this.range;
+        const inRange = [];
+
+        for (let id in mobs){
+            const mob = mobs[id];
+            if (mob.x >= min && mob.x <= max){
+                inRange.push(mob);
+            }
+        }
+
+        return inRange;
+    }
+
+    testAttack(mobs){
+        const inRange = this.mobsInRange(mobs);
+        for (let mob of inRange){
+            mob.loseHP(this.damage)
+        }
+    }
+
     findEnemies(enemies){
         let enemyIDs = [];
         

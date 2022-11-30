@@ -12,8 +12,18 @@ class Archer extends Tower{
         this.cost = 50;
     }
 
-    //single attack
+    //single attack = 0
     //hits closest target
+    //find closest enemy
+
+    attackInfo(){
+        //returns pos, range, attack type
+        //pos = this.x;
+        //range = this.range;
+        //attack type = 0;
+        return [this.x, this.range, 0]
+    }
+
     findEnemies(enemies){
         let enemyIDs = [];
         if (enemyIDs.length !== 1) {

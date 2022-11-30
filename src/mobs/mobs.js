@@ -1,6 +1,6 @@
-const Viking1 = require("./vikings/viking1test.js");
-const Viking2 = require("./vikings/viking2test.js");
-const Viking3 = require("./vikings/viking3test.js");
+const Viking1 = require("./vikingstest/viking1test.js");
+const Viking2 = require("./vikingstest/viking2test.js");
+const Viking3 = require("./vikingstest/viking3test.js");
 
 let gameSpeed = 1;
 
@@ -54,19 +54,18 @@ class Mobs {
                 this.currentMobs--;
             } else if (mob.hp < 1) {
                 if (player.endless()) player.addScore(mob.maxHP);
-                player.editMoney(mob.type + 1 + player.waveCount());
+                player.editMoney(mob.type + 1 + player.wave);
                 player.addMob();
                 delete mobs[id]
                 this.currentMobs--;
             }
         }
-
     }
 
     mobPositions(){
         const positions = {};
-        for (let id in mobs){
-            positions[id] = mobs[id].x;
+        for (let id in this.mobs){
+            positions[id] = this.mobs[id].x;
         }
         return positions
     }

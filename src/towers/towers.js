@@ -60,15 +60,12 @@ class Towers {
         this.attacks = attacks;
     }
 
-    testTowers(frame){
-        const attacks = [];
+    testTowers(mobs, frame){
         for (let pos in this.towers){
             const tower = this.towers[pos];
-            if (Math.floor(frame) % Math.floor(tower.speed) === 0) attacks.push(pos);
+            if (Math.floor(frame) % Math.floor(tower.speed) === 0) tower.testAttack(mobs);
             tower.updateFrame(frame);
         }
-        
-        if (attacks.length > 0) console.log(attacks, frame);
     }
 }
 
