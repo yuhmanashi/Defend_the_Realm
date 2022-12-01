@@ -15,7 +15,7 @@ class Player {
         this.waveOver = false;
         this.winGame = false;
         this.score = 0;
-        this.mode = 0;
+        this.mode = 1;
     }
 
     draw(){
@@ -31,7 +31,6 @@ class Player {
         ctx.fillStyle = 'black';
         ctx.fillText(`HP: ${this.hp}/${this.maxHP}`, 525, 515);
         ctx.fillText(`$: ${this.money}`, 525, 565);
-
     }
 
     loseHP(num){

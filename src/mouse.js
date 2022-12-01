@@ -81,6 +81,7 @@ class Mouse {
             addNextListeners();
         } else if (this.x >= 273 && this.x <= 525 && this.y >= 448 && this.y <= 523) {
             board.setState(2)
+            this.game.player.endlessMode();
             addNextListeners();
         }
     }

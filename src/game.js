@@ -1,36 +1,5 @@
-// const Util = require('./util.js');
-// const Mouse = require('./mouse.js');
-// const Map = require('./map/map.js');
-// const Knight = require('./towers/knight.js')
-// const Wizard = require('./towers/wizard.js');
-// const Archer = require('./towers/archer.js');
-// const Mob = require('./mobs.js');
-// const Tower = require('./towers.js');
-// const Player = require('./player.js');
-// const Platform = require('./map/platforms.js');
-
-// const platform = new Platform(2, 50, 300);
-
-// const canvas = document.getElementById('game-canvas');
-// const ctx = canvas.getContext('2d');
-// canvas.width = 800;
-// canvas.height = 600;
-
-// let baseTower = new Tower(0, 0);
-// let mob = new Mob();
-// let player = new Player();
-
-// let frame = 0;
-// let animationOn = false;
-// let gameOver = false;
-// let modeSelected = false;
-// let speed = 1;
-
-const Test = require('./test');
 const Player = require('./player');
-const Tower = require('./towers/tower');
 const Mobs = require('./mobs/mobs');
-
 const Board = require('./board/board');
 const Display = require('./board/display');
 const Mouse = require('./mouse');
