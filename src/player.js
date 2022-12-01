@@ -10,7 +10,7 @@ class Player {
         this.money = 200;
         this.wave = 1;
         this.maxWave = 5;
-        this.mobsCount = 10;
+        this.mobsCount = 5;
         this.mobsDeath = 0;
         this.waveOver = false;
         this.winGame = false;

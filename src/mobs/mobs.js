@@ -20,19 +20,20 @@ class Mobs {
     }
 
     manageMobs(player, frame){
-        // if (player.waveOver) {
-        //     MOBS.splice(0, MOBS.length)
-        //     if (player.winGame) {
-        //         player.waveOver = true;
-        //     } else { 
-        //         player.waveOver = false;
-        //     }
-        // }
+        if (player.waveOver) {
+            this.mobs = {};
+            if (player.winGame) {
+                player.waveOver = true;
+            } else { 
+                player.waveOver = false;
+            }
+        }
 
         const mobs = this.mobs;
         let mob = this.createMob(player.wave);
         if (player.wave > 1) mob.waveScalar();
 
+        //spawn mob
         if (Math.floor(frame) % Math.floor(mob.spawnRate) === 0 && this.currentMobs < player.mobsCount){
             mobs[mob.id] = mob;
             this.currentMobs++;
