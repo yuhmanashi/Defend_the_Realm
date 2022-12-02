@@ -24,6 +24,7 @@ class Mouse {
         this.x = x + 100;
     }
 
+    //change bounds?
     towerListener(event){
         this.recalcPos(event);
         const tower = this.tower;
