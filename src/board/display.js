@@ -44,7 +44,8 @@ class Display {
         ctx.drawImage(HUD[1], 0, 470);
         ctx.drawImage(HUD[2], 80, 470);
         ctx.drawImage(HUD[3], 160, 470);
-        // ctx.drawImage(HUD[4], 700, 65);
+        //speed button
+        ctx.drawImage(HUD[4], 700, 65);
         
         ctx.fillStyle = 'black';
         ctx.font = '20px Supermercado One, cursive';
@@ -88,8 +89,8 @@ class Display {
         if (player.endless()) {
             ctx.fillStyle = "white";
             ctx.font = '50px Architects Daughter, cursive';
-            ctx.fillText(`Your Score: ${player.playerScore()}`, 210, 140);
-            ctx.fillText(`Furthest Wave: ${player.waveCount()}`, 200, 80);
+            ctx.fillText(`Your Score: ${player.score}`, 210, 140);
+            ctx.fillText(`Furthest Wave: ${player.wave}`, 200, 80);
         }
     }
     
