@@ -1,4 +1,5 @@
 const Game = require("./game");
 
 const game = new Game();
-game.animate();
+game.start();
+// game.animate();

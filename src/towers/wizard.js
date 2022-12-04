@@ -1,29 +1,45 @@
-const Tower = require("../towers.js");
+const Tower = require("./tower.js");
 
 class Wizard extends Tower{
-    constructor(x, y) {
+    constructor(x = 0, y = 0) {
         super(x, y)
         this.type = 2;
         this.color = 'blue';
-        this.range = 300;
-        this.damage = 3;
-        this.speed = 1000;
-        this.baseSpeed = 1000;
+        this.range = 300; // 60 * 5
+        this.damage = 4;
+        this.speed = 1100;
+        this.baseSpeed = 1100;
         this.cost = 100;
     }
 
-    findEnemies(enemies){
-        let enemyIDs = [];
-        
-        for (let i = 0; i < enemies.length; i++) {
-            let id = enemies[i].currentInfo()[0];
-            let posX = enemies[i].currentInfo()[1];
-            if (posX > this.x - this.range && posX <= this.x + 70) {           
-                enemyIDs.push(id);
+    mobsInRange(mobs){
+        const min = this.x - this.range;
+        const max = this.x + this.range;
+        const inRange = [];
+
+        for (let id in mobs){
+            const mob = mobs[id];
+            if (mob.x >= min && mob.x <= max){
+                inRange.push(mob);
             }
         }
 
-        return enemyIDs.length ? enemyIDs : 0;
+        return inRange;
+    }
+
+    attack(mobs){
+        //hits all around the mob in middle of range
+        const inRange = this.mobsInRange(mobs);
+        if (inRange.length === 0) return;
+
+        const mid = Math.floor(inRange.length / 2);
+        const target = inRange[mid];
+        const targetMin = target.x - this.range;
+        const targetMax = target.x + this.range;
+
+        for (let mob of inRange){
+            if (mob.x >= targetMin && mob.x <= targetMax) mob.loseHP(this.damage);
+        }
     }
 }
 

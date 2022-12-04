@@ -1,27 +1,101 @@
 class Mouse {
-    constructor(canvas, context){
-        this.canvas = canvas;
-        this.context = context;
-        this.x = canvas.width/2,
-        this.y = canvas.height/2,
+    constructor(board, game){
+        this.board = board;
+        this.canvas = this.board.canvas;
+        this.game = game;
+        this.x = this.canvas.width/2,
+        this.y = this.canvas.height/2,
         this.tower = null;
-        this.offsetX = 0;
-        this.offsetY = 0;
+
+        this.recalcPos = this.recalcPos.bind(this);
+        this.splashListener = this.splashListener.bind(this);
     }
 
-    addEventListener(type, listener){
-        this.canvas.addEventListener(type, listener);
+    recalcPos(event){
+        this.board.offsetRecalc();
+        this.x = event.x - this.board.offsetX;
+        this.y = event.y - this.board.offsetY;
     }
 
-    checkRange(x1, x2, range){
-        if (x1 <= x2 - range || x1 >= x2 + range) return true;
-        return false;
+    adjustPos(){
+        //100-700
+        let x = this.x - 100;
+        x = x - (x % 60);
+        this.x = x + 100;
     }
 
-    offsetRecalc(){
-        const canvasPosition = this.canvas.getBoundingClientRect();
-        this.offsetX = canvasPosition.left;
-        this.offsetY = canvasPosition.top;
+    //change bounds?
+    towerListener(event){
+        this.recalcPos(event);
+        if (this.board.state !== 1) return;
+
+        const tower = this.tower;
+        const game = this.game;
+        const towers = this.game.towers;
+        const player = game.player;
+
+        if (tower) {
+            if (!player.checkMoney(tower.cost)){
+                this.changeTower();
+                return;
+            }
+
+            this.adjustPos();
+            tower.update(this.x, this.y);
+            
+            if (!towers.takenPos.has(this.x) && this.x >= 100 && this.x <= 700){ //x-bounds
+                if (this.y <= (300 + 10) && this.y >= 300 - 150){ //
+                    tower.update(this.x, (300 - 35));
+                    towers.takenPos.add(this.x);
+                    towers.addTower(this.x, tower);
+                    player.editMoney(-(tower.cost));
+                    this.changeTower();
+                }
+            }
+        }
+
+        if (this.x >= 44 && this.x <= 93 && this.y >= 490 && this.y <= 585) {
+            this.tower = towers.createTower(0);
+        } else if (this.x >= 124 && this.x <= 172 && this.y >= 490 && this.y <= 585){
+            this.tower = towers.createTower(1);
+        } else if (this.x >= 205 && this.x <= 250 && this.y >= 490 && this.y <= 585){
+            this.tower = towers.createTower(2);
+        }
+    }
+
+    refreshListener(event){
+        this.recalcPos(event);
+        if (this.board.state !== 2) return;
+
+        if (this.x >= 273 && this.x <= 525 && this.y >= 397 && this.y <= 473) {
+            window.location.reload();
+        }
+    }
+
+    splashListener(event){
+        const board = this.board
+        this.recalcPos(event);
+
+        if (board.state !== 0) return;
+
+        const nextState = () => {
+            this.board.setState(1)
+            this.game.toggleAnimation();
+            board.addEventListener('click', e => {this.towerListener(e)});
+        }
+
+        if (this.x >= 273 && this.x <= 525){
+            if (this.y >= 321 && this.y <= 395){
+                nextState();
+            } else if (this.y >= 448 && this.y <= 523){
+                nextState();
+                this.game.player.endlessMode();
+            }
+        }
+    }
+
+    changeTower(tower = null){
+        this.tower = tower;
     }
 }
 
