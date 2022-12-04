@@ -12,7 +12,7 @@ class Viking2 extends Viking{
     constructor(wave, id){
         super(wave, id);
         this.y = 200;
-        this.type = 1;
+        
         this.hp = 6;
         this.speed = .1;
         this.baseSpeed = .1;

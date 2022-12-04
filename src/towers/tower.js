@@ -10,6 +10,7 @@ class Tower {
         this.range = 0;
         this.damage = 0;
         this.speed = 0;
+        this.baseSpeed = 0;
     }
 
     update(x, y){
@@ -41,13 +42,9 @@ class Tower {
     //     })
     // }
 
-    // changeSpeed(gameSpeed){
-    //     if (!this.checkSpeed(gameSpeed)){
-    //         for (let i = 0; i < TOWERS.length; i++){
-    //             TOWERS[i].updateSpeed(gameSpeed)
-    //         }
-    //     }
-    // }
+    changeSpeed(speed){
+        this.speed = this.baseSpeed / speed;
+    }
 
     // updateSpeed(gameSpeed){
     //     this.speed = this.baseSpeed / gameSpeed;

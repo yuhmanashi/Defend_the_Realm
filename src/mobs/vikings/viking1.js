@@ -11,7 +11,7 @@ const IMAGES = [];
 class Viking1 extends Viking{
     constructor(wave, id){
         super(wave, id);
-        this.type = 0;
+        
         this.hp = 6;
         this.y = 200
         this.speed = .2;
