@@ -24,6 +24,14 @@ class Mouse {
         this.x = x + 100;
     }
 
+    checkX(low, high){
+        return this.x >= low && this.x <= high;
+    }
+
+    checkY(low, high){
+        return this.y >= low && this.y <= high;
+    }   
+
     //change bounds?
     towerListener(event){
         this.recalcPos(event);
@@ -43,8 +51,8 @@ class Mouse {
             this.adjustPos();
             tower.update(this.x, this.y);
             
-            if (!towers.takenPos.has(this.x) && this.x >= 100 && this.x <= 700){ //x-bounds
-                if (this.y <= (300 + 10) && this.y >= 300 - 150){ //
+            if (!towers.takenPos.has(this.x) && this.checkX(100, 700)){ //x-bounds
+                if (this.checkY(300 - 150, 300 + 10)){ //
                     tower.update(this.x, (300 - 35));
                     towers.takenPos.add(this.x);
                     towers.addTower(this.x, tower);
@@ -54,11 +62,11 @@ class Mouse {
             }
         }
 
-        if (this.x >= 44 && this.x <= 93 && this.y >= 490 && this.y <= 585) {
+        if (this.checkX(44, 93) && this.checkY(490, 585)) {
             this.tower = towers.createTower(0);
-        } else if (this.x >= 124 && this.x <= 172 && this.y >= 490 && this.y <= 585){
+        } else if (this.checkX(124, 172) && this.checkY(490, 585)){
             this.tower = towers.createTower(1);
-        } else if (this.x >= 205 && this.x <= 250 && this.y >= 490 && this.y <= 585){
+        } else if (this.checkX(205, 250) && this.checkY(490, 585)){
             this.tower = towers.createTower(2);
         }
     }
@@ -67,7 +75,7 @@ class Mouse {
         this.recalcPos(event);
         if (this.board.state !== 2) return;
 
-        if (this.x >= 273 && this.x <= 525 && this.y >= 397 && this.y <= 473) {
+        if (this.checkX(273, 525) && this.checkY(397, 473)) {
             window.location.reload();
         }
     }
@@ -82,15 +90,24 @@ class Mouse {
             this.board.setState(1)
             this.game.toggleAnimation();
             board.addEventListener('click', e => {this.towerListener(e)});
+            board.addEventListener('click', e => {this.speedListener(e)});
         }
 
-        if (this.x >= 273 && this.x <= 525){
-            if (this.y >= 321 && this.y <= 395){
+        if (this.checkX(273, 525)){
+            if (this.checkY(321, 395)){
                 nextState();
-            } else if (this.y >= 448 && this.y <= 523){
+            } else if (this.checkY(448, 523)){
                 nextState();
                 this.game.player.endlessMode();
             }
+        }
+    }
+
+    speedListener(event){
+        this.recalcPos(event);
+        const player = this.game.player;
+        if (this.checkX(674, 740) && this.checkY(69, 106)){
+            player.changeSpeed();
         }
     }
 

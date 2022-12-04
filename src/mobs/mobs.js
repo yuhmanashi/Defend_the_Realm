@@ -19,7 +19,7 @@ class Mobs {
         return type === 0 ? new Viking1(wave, this.mobCount) : type === 1 ? new Viking2(wave, this.mobCount) : new Viking3(wave, this.mobCount);
     }
 
-    manageMobs(player, frame){
+    manageMobs(player, frame, speed){
         if (player.waveOver) {
             this.mobs = {};
             if (player.winGame) {
@@ -34,14 +34,14 @@ class Mobs {
         if (player.wave > 1) mob.waveScalar();
 
         //spawn mob
-        if (Math.floor(frame) % Math.floor(mob.spawnRate) === 0 && this.currentMobs < player.mobsCount){
+        if (Math.floor(frame) % Math.floor(mob.spawnRate / speed) === 0 && this.currentMobs < player.mobsCount){
             mobs[mob.id] = mob;
             this.currentMobs++;
         }
 
         for (let id in mobs){
             const mob = this.mobs[id];
-            mob.update(frame)
+            mob.update(frame, speed)
             mob.preload();
             if (mob.x >= 670) {
                 player.loseHP(mob.damage);
