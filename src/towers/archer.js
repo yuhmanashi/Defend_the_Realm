@@ -18,7 +18,9 @@ class Archer extends Tower{
         const inRange = [];
 
         for (let id in mobs){
-            if (inRange.length > 0) return inRange;
+            if (inRange.length > 0){
+                return inRange;
+            }
 
             const mob = mobs[id];
             if (mob.x >= min && mob.x <= max){
@@ -26,13 +28,13 @@ class Archer extends Tower{
             }
         }
 
-        return null;
+        return inRange;
     }
 
     attack(mobs){
         //hits first enemy in range
         const inRange = this.mobInRange(mobs);
-        if (inRange) inRange[0].loseHP(this.damage);
+        if (inRange.length > 0) inRange[0].loseHP(this.damage);
     }
 }
 
