@@ -5,12 +5,12 @@ const ctx = canvas.getContext('2d');
 
 class Player {
     constructor(){
-        this.hp = 1;
+        this.hp = 10;
         this.maxHP = this.hp;
         this.money = 200;
         this.wave = 1;
         this.maxWave = 5;
-        this.mobsCount = 3;
+        this.mobsCount = 5;
         this.mobsDeath = 0;
         this.waveOver = false;
         this.winGame = false;
@@ -92,7 +92,6 @@ class Player {
         } else {
             this.speed *= 2;
         }
-        console.log(this.speed)
     }
 }
 
