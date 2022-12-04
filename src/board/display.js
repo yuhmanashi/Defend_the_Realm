@@ -72,7 +72,7 @@ class Display {
     }
 
     //lose
-    renderLose(){
+    renderLose(player){
         const canvas = this.board.canvas;
         const ctx = this.board.ctx;
         
@@ -85,17 +85,16 @@ class Display {
         ctx.font = '100px Syne Tactile, cursive';
         ctx.fillText('Game Over', canvas.width/3 - 100, canvas.height/3 + 50);
 
-        // no player right now, might refactor
-        // if (player.endless()) {
-        //     ctx.fillStyle = "white";
-        //     ctx.font = '50px Architects Daughter, cursive';
-        //     ctx.fillText(`Your Score: ${player.playerScore()}`, 210, 140);
-        //     ctx.fillText(`Furthest Wave: ${player.waveCount()}`, 200, 80);
-        // }
+        if (player.endless()) {
+            ctx.fillStyle = "white";
+            ctx.font = '50px Architects Daughter, cursive';
+            ctx.fillText(`Your Score: ${player.playerScore()}`, 210, 140);
+            ctx.fillText(`Furthest Wave: ${player.waveCount()}`, 200, 80);
+        }
     }
     
-    loadLose(){
-        Util.preloadImages(backgroundURLs, backgrounds, this.renderLose);
+    loadLose(player){
+        Util.preloadImages(backgroundURLs, backgrounds, () => {this.renderLose(player)});
     }
 
     //win

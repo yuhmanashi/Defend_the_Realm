@@ -57,8 +57,7 @@ class Player {
     }
 
     endless(){
-        if (this.mode === 1) return true;
-        return false;
+        return this.mode === 1 ? true : false
     }
 
     loseHP(num){

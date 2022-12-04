@@ -15,15 +15,10 @@ class Board {
 
     setState(state){
         this.state = state;
-        console.log(this.state);
     }
 
-    checkState(){
-
-    }
-
-    splash(){
-
+    clear(){
+        this.ctx.clearRect(0,0,0,0)
     }
 
     addEventListener(type, listener, options = false){

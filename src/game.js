@@ -38,14 +38,14 @@ class Game {
         }
 
         if (this.animationOn){
-            board.ctx.clearRect(0, 0, 0, 0)
+            board.clear();
             this.display.loadGameMode1();
             this.player.draw();
             this.towers.loadTowers();
         
             if (this.player.hp < 1) {
                 this.animationOn = false;
-                this.display.loadLose();
+                this.display.loadLose(this.player);
                 nextState();
             }
 
