@@ -15,7 +15,7 @@ class Player {
         this.waveOver = false;
         this.winGame = false;
         this.score = 0;
-        this.mode = 1;
+        this.mode = 0;
     }
 
     draw(){
@@ -31,18 +31,6 @@ class Player {
         ctx.fillStyle = 'black';
         ctx.fillText(`HP: ${this.hp}/${this.maxHP}`, 525, 515);
         ctx.fillText(`$: ${this.money}`, 525, 565);
-    }
-
-    loseHP(num){
-        this.hp -= num;
-    }
-
-    editMoney(num){
-        this.money += num;
-    }
-
-    addWave(){
-        this.wave += 1;
     }
 
     addMob(){
@@ -73,14 +61,26 @@ class Player {
         return false;
     }
 
+    loseHP(num){
+        this.hp -= num;
+    }
+
+    editMoney(num){
+        this.money += num;
+    }
+
+    addWave(){
+        this.wave += 1;
+    }
+
     addScore(score){
         this.score += score;
     }
 
     checkMoney(cost){
-        if (this.money - cost >= 0){
+        if ((this.money - cost) >= 0){
             return true;
-        } 
+        }
         
         return false;
     }

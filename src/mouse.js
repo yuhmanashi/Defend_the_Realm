@@ -27,6 +27,8 @@ class Mouse {
     //change bounds?
     towerListener(event){
         this.recalcPos(event);
+        if (this.board.state !== 1) return;
+
         const tower = this.tower;
         const game = this.game;
         const towers = this.game.towers;
@@ -63,27 +65,32 @@ class Mouse {
 
     refreshListener(event){
         this.recalcPos(event);
+        if (this.board.state !== 2) return;
+
         if (this.x >= 273 && this.x <= 525 && this.y >= 397 && this.y <= 473) {
             window.location.reload();
         }
     }
 
-    splashListener(event, func){
+    splashListener(event){
         const board = this.board
         this.recalcPos(event);
-        
-        const addNextListeners = () => {
+
+        if (board.state !== 0) return;
+
+        const nextState = () => {
+            this.board.setState(1)
             this.game.toggleAnimation();
             board.addEventListener('click', e => {this.towerListener(e)});
         }
 
-        if (this.x >= 273 && this.x <= 525 && this.y >= 321 && this.y <= 395) {
-            board.setState(1)
-            addNextListeners();
-        } else if (this.x >= 273 && this.x <= 525 && this.y >= 448 && this.y <= 523) {
-            board.setState(2)
-            this.game.player.endlessMode();
-            addNextListeners();
+        if (this.x >= 273 && this.x <= 525){
+            if (this.y >= 321 && this.y <= 395){
+                nextState();
+            } else if (this.y >= 448 && this.y <= 523){
+                nextState();
+                this.game.player.endlessMode();
+            }
         }
     }
 

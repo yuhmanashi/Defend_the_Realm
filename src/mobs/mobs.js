@@ -1,6 +1,6 @@
-const Viking1 = require("./vikingstest/viking1test.js");
-const Viking2 = require("./vikingstest/viking2test.js");
-const Viking3 = require("./vikingstest/viking3test.js");
+const Viking1 = require("./vikings/viking1.js");
+const Viking2 = require("./vikings/viking2.js");
+const Viking3 = require("./vikings/viking3.js");
 
 let gameSpeed = 1;
 

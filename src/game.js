@@ -12,15 +12,12 @@ class Game {
         this.display = new Display(this.board);
         this.mouse = new Mouse(this.board, this);
         this.player = new Player();
-        // this.tower = new Tower(0, 0);
         this.mobs = new Mobs();
+        this.towers = new Towers(this.board);
 
         this.frame = 0;
         this.animationOn = false;
-
         this.gameMode = 0;
-
-        this.towers = new Towers(this.board);
     }
 
     toggleAnimation(){
@@ -28,13 +25,20 @@ class Game {
     }
 
     animate(){
+        const board = this.board;
+        const nextState = () => {
+            board.addEventListener('click', e => {this.mouse.refreshListener(e)});
+            board.setState(2);
+        }
+
         if (this.player.winGame) {
             this.animationOn = false;
             this.display.loadWin();
+            nextState();
         }
 
         if (this.animationOn){
-            this.board.ctx.clearRect(0, 0, 0, 0)
+            board.ctx.clearRect(0, 0, 0, 0)
             this.display.loadGameMode1();
             this.player.draw();
             this.towers.loadTowers();
@@ -42,7 +46,7 @@ class Game {
             if (this.player.hp < 1) {
                 this.animationOn = false;
                 this.display.loadLose();
-                this.board.addEventListener('click', e => {this.mouse.refreshListener(e)})
+                nextState();
             }
 
             if (this.player.hp > 0) {
@@ -62,7 +66,7 @@ class Game {
         const mouse = this.mouse;
 
         display.loadSplash();
-        board.addEventListener('click', e => {mouse.splashListener(e)}, {once: true})
+        board.addEventListener('click', e => {mouse.splashListener(e)});
 
         this.animate();
     }

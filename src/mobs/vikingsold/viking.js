@@ -1,5 +1,9 @@
-const URLS = ['mobs/viking1_90', 'mobs/viking2_90', 'mobs/viking3_90', 'mobs/v1_771x90sprite'];
+const Util = require("../../util.js")
 
+const canvas = document.getElementById('game-canvas');
+const ctx = canvas.getContext('2d');
+
+const URLS = ['mobs/viking1_90', 'mobs/viking2_90', 'mobs/viking3_90'];
 const IMAGES = [];
 
 const VIKINGS = [];
@@ -24,21 +28,32 @@ class Viking {
         this.baseSpeed = .2;
         this.damage = 1;
         this.spawnrate = 200;
-        this.animation = [];
     }
 
-    update(frame){
-        this.frame = Math.floor((frame / 3) % 10);
-        
+    update(){
+        // this.frame = frame % 10;
         if (this.x <= 670) {
             this.x += this.speed; // .5
             this.posX = this.x + 55;
         }
     }
 
-    // preload(callback){
-    //     Util.preloadImages(URLS, IMAGES, callback);
-    // }
+    preload(){
+        Util.preloadImages(URLS, IMAGES, this.draw.bind(this));
+    }
+
+    draw(){
+        ctx.drawImage(IMAGES[this.type], this.x, this.y);
+
+        // ctx.drawImage(IMAGES[this.type], this.frame * this.spriteWidth, this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x, this.y, this.spriteWidth, this.spriteHeight);
+        ctx.fillStyle = '#f2e277';
+        ctx.font = '20px Syne Tactile, cursive';
+        // ctx.fillText(this.id, this.x + 40, this.y - 30)
+        ctx.fillText(Math.floor(this.hp), this.x + 45, this.y)
+        // ctx.fillText(this.speed, this.x + 35, this.y + 110)
+        // ctx.fillText(this.spawnRate, this.x + 35, this.y + 130)
+        // ctx.fillText(Math.floor(this.x + 55), this.x + 30, this.y + 120)
+    }
 
     // drawRect(){
     //     ctx.fillStyle = 'red';
@@ -71,6 +86,7 @@ class Viking {
     //     }
 
     // }
+
     currentVikings(){
         return VIKINGS;
     }
@@ -81,6 +97,14 @@ class Viking {
 
     loseHP(num){
         this.hp -= num;
+    }
+
+    currentImages(){
+        return IMAGES;
+    }
+
+    currentURLS(){
+        return URLS;
     }
 
     updateSpeed(gameSpeed){

@@ -11,11 +11,11 @@ class Board {
         this.offsetY = 0;
 
         this.state = 0;
-        //0 - splash 1 - classic 2 - endless
     }
 
     setState(state){
         this.state = state;
+        console.log(this.state);
     }
 
     checkState(){
