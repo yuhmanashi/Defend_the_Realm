@@ -5,6 +5,7 @@ class Viking {
         this.x = 30; // start = platform.x - 20;
         // 
         this.y = 0;
+        this.type = 0;
         this.hp = 0;
         this.speed = 0;
         this.baseSpeed = 0;
@@ -14,11 +15,11 @@ class Viking {
         this.frame = 0;
     }
 
-    update(frame){
+    update(frame, speed){
         this.frame = Math.floor((frame / 3) % 10);
         
         if (this.x <= 670) {
-            this.x += this.speed; // .5
+            this.x += this.speed * speed; // .5
             this.posX = this.x + 55;
         }
     }

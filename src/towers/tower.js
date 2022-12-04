@@ -42,9 +42,9 @@ class Tower {
     //     })
     // }
 
-    changeSpeed(speed){
-        this.speed = this.baseSpeed / speed;
-    }
+    // changeSpeed(speed){
+    //     this.speed = this.baseSpeed / speed;
+    // }
 
     // updateSpeed(gameSpeed){
     //     this.speed = this.baseSpeed / gameSpeed;
