@@ -55,7 +55,6 @@ class Game {
                 this.mobs.manageMobs(this.player, this.frame);
             }
 
-            console.log(this.frame);
             this.frame++;
         }
 
