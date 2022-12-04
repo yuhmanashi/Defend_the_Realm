@@ -1,29 +1,40 @@
-const Tower = require("../towers.js");
+const Tower = require("./tower.js");
 
 class Archer extends Tower{
-    constructor(x, y) {
+    constructor(x = 0, y = 0) {
         super(x, y)
         this.type = 1;
         this.color = 'green';
-        this.range = 250;
+        this.range = 240; //60 * 4 
         this.damage = 2;
         this.speed = 300;
         this.baseSpeed = 300;
         this.cost = 50;
     }
 
-    findEnemies(enemies){
-        let enemyIDs = [];
-        if (enemyIDs.length !== 1) {
-            for (let i = 0; i < enemies.length && enemyIDs.length < 1; i++) {
-                let id = enemies[i].currentInfo()[0];
-                let posX = enemies[i].currentInfo()[1];
-                if (posX > this.x - this.range && posX <= this.x + 70) {           
-                    enemyIDs.push(id);
-                }
+    mobInRange(mobs){
+        const min = this.x - this.range;
+        const max = this.x + this.range;
+        const inRange = [];
+
+        for (let id in mobs){
+            if (inRange.length > 0){
+                return inRange;
+            }
+
+            const mob = mobs[id];
+            if (mob.x >= min && mob.x <= max){
+                inRange.push(mob);
             }
         }
-        return enemyIDs.length ? enemyIDs : 0;
+
+        return inRange;
+    }
+
+    attack(mobs){
+        //hits first enemy in range
+        const inRange = this.mobInRange(mobs);
+        if (inRange.length > 0) inRange[0].loseHP(this.damage);
     }
 }
 
