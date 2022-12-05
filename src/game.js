@@ -51,8 +51,8 @@ class Game {
 
             if (this.player.hp > 0) {
                 if (this.player.waveOver) this.frame = 1;
-                this.towers.attack(this.mobs.mobs, this.frame, this.player.speed);
-                this.mobs.manageMobs(this.player, this.frame, this.player.speed);
+                // this.towers.attack(this.mobs.mobs, this.frame, this.player.speed);
+                // this.mobs.manageMobs(this.player, this.frame, this.player.speed);
             }
 
             this.frame++;

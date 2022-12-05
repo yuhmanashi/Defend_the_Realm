@@ -62,12 +62,12 @@ class Mouse {
             }
         }
 
-        if (this.checkX(44, 93) && this.checkY(490, 585)) {
-            this.tower = towers.createTower(0);
-        } else if (this.checkX(124, 172) && this.checkY(490, 585)){
-            this.tower = towers.createTower(1);
-        } else if (this.checkX(205, 250) && this.checkY(490, 585)){
+        if (this.checkX(40, 100) && this.checkY(485, 585)) {
             this.tower = towers.createTower(2);
+        } else if (this.checkX(130, 200) && this.checkY(485, 585)){
+            this.tower = towers.createTower(0);
+        } else if (this.checkX(225, 300) && this.checkY(485, 585)){
+            this.tower = towers.createTower(1);
         }
     }
 

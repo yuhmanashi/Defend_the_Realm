@@ -3,8 +3,8 @@ const Util = require("../../util.js");
 const canvas = document.getElementById('game-canvas');
 const ctx = canvas.getContext('2d');
 
-const runAnimation = ['mobs/viking1/0', 'mobs/viking1/1', 'mobs/viking1/2', 'mobs/viking1/3', 'mobs/viking1/4', 
-'mobs/viking1/5', 'mobs/viking1/6', 'mobs/viking1/7', 'mobs/viking1/8', 'mobs/viking1/9']
+const runAnimation = ['mobs/viking1/run/0', 'mobs/viking1/run/1', 'mobs/viking1/run/2', 'mobs/viking1/run/3', 'mobs/viking1/run/4', 
+'mobs/viking1/run/5', 'mobs/viking1/run/6', 'mobs/viking1/run/7', 'mobs/viking1/run/8', 'mobs/viking1/run/9']
 
 const IMAGES = [];
 

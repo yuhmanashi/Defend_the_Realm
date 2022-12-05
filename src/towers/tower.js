@@ -19,7 +19,7 @@ class Tower {
     }
 
     updateFrame(frame) {
-        this.frame = frame;
+        this.frame = Math.floor((frame / 3) % 10);
     }
 
 
@@ -34,22 +34,6 @@ class Tower {
     payCost(player){
         player.money -= this.cost;
     }
-
-    //
-    // checkSpeed(gameSpeed){
-    //     TOWERS.every(tower => {
-    //         (tower.speed * gameSpeed) === tower.baseSpeed
-    //     })
-    // }
-
-    // changeSpeed(speed){
-    //     this.speed = this.baseSpeed / speed;
-    // }
-
-    // updateSpeed(gameSpeed){
-    //     this.speed = this.baseSpeed / gameSpeed;
-    //     // this.spawnRate = this.baseSpawnRate * gameSpeed;
-    // }
 }
 
 
