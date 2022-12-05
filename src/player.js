@@ -7,11 +7,11 @@ class Player {
     constructor(){
         this.hp = 10;
         this.maxHP = this.hp;
-        this.money = 200;
+        this.money = 150;
         this.wave = 1;
         this.maxWave = 5;
         this.mobsCount = 5;
-        this.mobsDeath = 0;
+        this.mobsLeft = this.mobsCount;
         this.waveOver = false;
         this.winGame = false;
         this.score = 0;
@@ -24,7 +24,7 @@ class Player {
         ctx.fillStyle = 'white';
         ctx.font = '50px Architects Daughter, cursive';
         ctx.fillText(`Wave: ${this.wave}/${this.maxWave}`, 20, 50);
-        ctx.fillText(`Enemies: ${this.mobsDeath}/${this.mobsCount}`, 450, 50)
+        ctx.fillText(`Enemies: ${this.mobsLeft}/${this.mobsCount}`, 450, 50)
         ctx.fillText(`Speed: ${this.speed}x`, 450, 100);
         if (this.mode === 1) {
             ctx.fillText(`Score: ${this.score}`, 20, 110);
@@ -36,13 +36,13 @@ class Player {
     }
 
     addMob(){
-        this.mobsDeath += 1;
-        if (this.mobsDeath >= this.mobsCount) {
+        this.mobsLeft--;
+        if (this.mobsLeft === 0) {
             if (this.wave === this.maxWave) { 
                 this.winGame = true;
             } else {
-                this.mobsDeath = 0;
                 this.mobsCount = Math.floor(this.mobsCount * 1.5);
+                this.mobsLeft = this.mobsCount;
                 this.wave += 1;
                 this.waveOver = true;
             }

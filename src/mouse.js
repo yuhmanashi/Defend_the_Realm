@@ -50,7 +50,7 @@ class Mouse {
 
             tower.update(this.adjustX(), this.y);
             
-            if (!towers.takenPos.has(tower.x) && this.checkX(100, 640)){ //x-bounds
+            if (!towers.takenPos.has(tower.x) && this.checkX(100, 700)){ //x-bounds
                 if (this.checkY(300 - 150, 300 + 10)){ //
                     tower.update(tower.x, (300 - 50));
                     towers.takenPos.add(tower.x);

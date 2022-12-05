@@ -31,7 +31,7 @@ class Viking1 extends Viking{
         this.hp = Math.floor(this.hp + this.wave - 1);
         this.baseSpeed = this.baseSpeed + (this.wave * .01);
         this.speed = this.baseSpeed;
-        this.damage = Math.floor((this.damage + this.wave)/2);
+        // this.damage = Math.floor((this.damage + this.wave)/2);
         this.baseSpawnRate = this.baseSpawnRate - (this.wave * 10);
         this.spawnRate = this.baseSpawnRate;
         this.maxHP = this.hp;

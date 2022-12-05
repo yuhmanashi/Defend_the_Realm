@@ -26,7 +26,7 @@ class Wizard extends Tower{
 
     mobsInRange(mobs){
         const min = this.x - this.range;
-        const max = this.x + this.range;
+        const max = this.x + (this.range / 2);
         const inRange = [];
 
         for (let id in mobs){

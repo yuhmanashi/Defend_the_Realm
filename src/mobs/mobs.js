@@ -22,6 +22,7 @@ class Mobs {
     manageMobs(player, frame, speed){
         if (player.waveOver) {
             this.mobs = {};
+            this.currentMobs = 0;
             if (player.winGame) {
                 player.waveOver = true;
             } else { 
@@ -51,6 +52,7 @@ class Mobs {
             } else if (mob.hp < 1){
                 dead[id] = mob;
                 delete mobs[id];
+                player.addMob();
             } else {
                 mob.loadRun();
             }
@@ -63,9 +65,7 @@ class Mobs {
             if (mob.deathFrame === 9){
                 if (player.endless()) player.addScore(mob.maxHP);
                 player.editMoney(mob.type + 1 + player.wave);
-                player.addMob();
                 delete dead[id];
-                this.currentMobs--;
             }
         }
     }
