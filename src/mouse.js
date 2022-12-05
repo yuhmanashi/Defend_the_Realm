@@ -17,11 +17,11 @@ class Mouse {
         this.y = event.y - this.board.offsetY;
     }
 
-    adjustPos(){
+    adjustX(){
         //100-700
         let x = this.x - 100;
         x = x - (x % 60);
-        this.x = x + 100;
+        return x + 100;
     }
 
     checkX(low, high){
@@ -36,7 +36,7 @@ class Mouse {
     towerListener(event){
         this.recalcPos(event);
         if (this.board.state !== 1) return;
-
+        
         const tower = this.tower;
         const game = this.game;
         const towers = this.game.towers;
@@ -48,25 +48,24 @@ class Mouse {
                 return;
             }
 
-            this.adjustPos();
-            tower.update(this.x, this.y);
+            tower.update(this.adjustX(), this.y);
             
-            if (!towers.takenPos.has(this.x) && this.checkX(100, 700)){ //x-bounds
+            if (!towers.takenPos.has(tower.x) && this.checkX(100, 700)){ //x-bounds
                 if (this.checkY(300 - 150, 300 + 10)){ //
-                    tower.update(this.x, (300 - 35));
-                    towers.takenPos.add(this.x);
-                    towers.addTower(this.x, tower);
+                    tower.update(tower.x, (300 - 50));
+                    towers.takenPos.add(tower.x);
+                    towers.addTower(tower.x, tower);
                     player.editMoney(-(tower.cost));
                     this.changeTower();
                 }
             }
         }
 
-        if (this.checkX(44, 93) && this.checkY(490, 585)) {
+        if (this.checkX(40, 100) && this.checkY(485, 585)) {
             this.tower = towers.createTower(0);
-        } else if (this.checkX(124, 172) && this.checkY(490, 585)){
+        } else if (this.checkX(130, 200) && this.checkY(485, 585)){
             this.tower = towers.createTower(1);
-        } else if (this.checkX(205, 250) && this.checkY(490, 585)){
+        } else if (this.checkX(225, 300) && this.checkY(485, 585)){
             this.tower = towers.createTower(2);
         }
     }

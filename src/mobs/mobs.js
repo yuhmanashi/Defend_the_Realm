@@ -1,8 +1,7 @@
+const Viking = require("./vikings/viking.js");
 const Viking1 = require("./vikings/viking1.js");
 const Viking2 = require("./vikings/viking2.js");
 const Viking3 = require("./vikings/viking3.js");
-
-let gameSpeed = 1;
 
 class Mobs {
     constructor() {
@@ -11,6 +10,7 @@ class Mobs {
         this.mobCount = 0;
         this.currentMobs = 0;
         this.attacks = {};
+        this.dead = {};
     }
 
     createMob(wave){
@@ -22,6 +22,7 @@ class Mobs {
     manageMobs(player, frame, speed){
         if (player.waveOver) {
             this.mobs = {};
+            this.currentMobs = 0;
             if (player.winGame) {
                 player.waveOver = true;
             } else { 
@@ -30,6 +31,7 @@ class Mobs {
         }
 
         const mobs = this.mobs;
+        const dead = this.dead;
         let mob = this.createMob(player.wave);
         if (player.wave > 1) mob.waveScalar();
 
@@ -42,17 +44,28 @@ class Mobs {
         for (let id in mobs){
             const mob = this.mobs[id];
             mob.update(frame, speed)
-            mob.preload();
+    
             if (mob.x >= 670) {
                 player.loseHP(mob.damage);
                 delete mobs[id];
                 this.currentMobs--;
-            } else if (mob.hp < 1) {
+            } else if (mob.hp < 1){
+                dead[id] = mob;
+                delete mobs[id];
+                player.addMob();
+            } else {
+                mob.loadRun();
+            }
+        }
+
+        for (let id in dead){
+            const mob = dead[id]
+            mob.loadDeath();
+            mob.updateDeathFrame();
+            if (mob.deathFrame === 9){
                 if (player.endless()) player.addScore(mob.maxHP);
                 player.editMoney(mob.type + 1 + player.wave);
-                player.addMob();
-                delete mobs[id]
-                this.currentMobs--;
+                delete dead[id];
             }
         }
     }

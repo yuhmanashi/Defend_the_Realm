@@ -41,7 +41,7 @@ class Game {
             board.clear();
             this.display.loadGameMode1();
             this.player.draw();
-            this.towers.loadTowers();
+            // this.towers.loadTowers();
         
             if (this.player.hp < 1) {
                 this.animationOn = false;

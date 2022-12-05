@@ -5,7 +5,7 @@ const Player = require('../player.js');
 const backgroundURLs = ['background/forest', 'misc/play250x83', 'misc/scroll3', 'misc/exit', 'misc/endless'];
 const backgrounds = [];
 
-const hudURLs = ['background/hud', 'towers/base/knightbase120', 'towers/base/archerbase120', 'towers/base/icewizardbase120', 'misc/speedbtn4']
+const hudURLs = ['background/hud', 'towers/IceWizard/attack/0', 'towers/Knight/attack/0', 'towers/Archer/attack/0', 'misc/speedbtn4']
 const HUD = [];
 
 const portalURLs = ['portal/50x105', 'portal/endgreen']
@@ -41,17 +41,17 @@ class Display {
     renderHUD(){
         const ctx = this.board.ctx;
         ctx.drawImage(HUD[0], 0, 440);
-        ctx.drawImage(HUD[1], 0, 470);
-        ctx.drawImage(HUD[2], 80, 470);
-        ctx.drawImage(HUD[3], 160, 470);
+        ctx.drawImage(HUD[1], -17, 446, 170, 170);
+        ctx.drawImage(HUD[2], 80, 446, 170, 170);
+        ctx.drawImage(HUD[3], 178, 450, 170, 170);
         //speed button
         ctx.drawImage(HUD[4], 700, 65);
         
         ctx.fillStyle = 'black';
         ctx.font = '20px Supermercado One, cursive';
-        ctx.fillText('Knight', 35, 479);
-        ctx.fillText('Archer', 115, 479);
-        ctx.fillText('Wizard', 195, 479);
+        ctx.fillText('Wizard', 35, 479);
+        ctx.fillText('Knight', 135, 479);
+        ctx.fillText('Archer', 235, 479);
     }
 
     loadHUD(){
