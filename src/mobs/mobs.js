@@ -1,8 +1,7 @@
+const Viking = require("./vikings/viking.js");
 const Viking1 = require("./vikings/viking1.js");
 const Viking2 = require("./vikings/viking2.js");
 const Viking3 = require("./vikings/viking3.js");
-
-let gameSpeed = 1;
 
 class Mobs {
     constructor() {
@@ -15,8 +14,9 @@ class Mobs {
 
     createMob(wave){
         this.mobCount++;
-        let type = Math.floor(Math.random() * 3)
-        return type === 0 ? new Viking1(wave, this.mobCount) : type === 1 ? new Viking2(wave, this.mobCount) : new Viking3(wave, this.mobCount);
+        // let type = Math.floor(Math.random() * 3)
+        // return type === 0 ? new Viking1(wave, this.mobCount) : type === 1 ? new Viking2(wave, this.mobCount) : new Viking3(wave, this.mobCount);
+        return new Viking1(wave, this.mobCount)
     }
 
     manageMobs(player, frame, speed){
@@ -42,7 +42,7 @@ class Mobs {
         for (let id in mobs){
             const mob = this.mobs[id];
             mob.update(frame, speed)
-            mob.preload();
+            mob.loadRun();
             if (mob.x >= 670) {
                 player.loseHP(mob.damage);
                 delete mobs[id];
@@ -51,6 +51,8 @@ class Mobs {
                 if (player.endless()) player.addScore(mob.maxHP);
                 player.editMoney(mob.type + 1 + player.wave);
                 player.addMob();
+                //trigger death animation?
+                mob.loadDeath();
                 delete mobs[id]
                 this.currentMobs--;
             }
