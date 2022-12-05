@@ -37,7 +37,7 @@ class Archer extends Tower{
 
             const mob = mobs[id];
             if (mob.x >= min && mob.x <= max){
-                inRange.push(mob);
+                if (mob.hp > 0) inRange.push(mob);
             }
         }
 

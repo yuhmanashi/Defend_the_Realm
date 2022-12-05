@@ -22,9 +22,9 @@ class Viking1 extends Viking{
         this.damage = 1;
         this.baseSpawnRate = 1000;
         this.spawnRate = 1000;
-        // this.run = runAnimation;
-        // this.animation = runSprites;
+
         this.frame = 0;
+        this.deathFrame = 0;
     }
 
     waveScalar(){
@@ -35,10 +35,6 @@ class Viking1 extends Viking{
         this.baseSpawnRate = this.baseSpawnRate - (this.wave * 10);
         this.spawnRate = this.baseSpawnRate;
         this.maxHP = this.hp;
-    }
-
-    preload(sprites, loaded, callback){
-        Util.preloadImages(sprites, loaded, callback);
     }
 
     run(){
@@ -63,7 +59,7 @@ class Viking1 extends Viking{
         const dWidth = 130;
         const dHeight = 130;
 
-        ctx.drawImage(dieLoaded[this.frame], dx, dy, dWidth, dHeight)
+        ctx.drawImage(dieLoaded[Math.floor(this.deathFrame)], dx, dy, dWidth, dHeight)
     }
 
     loadDeath(){

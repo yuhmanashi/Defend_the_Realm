@@ -10,13 +10,13 @@ class Mobs {
         this.mobCount = 0;
         this.currentMobs = 0;
         this.attacks = {};
+        this.dead = {};
     }
 
     createMob(wave){
         this.mobCount++;
-        // let type = Math.floor(Math.random() * 3)
-        // return type === 0 ? new Viking1(wave, this.mobCount) : type === 1 ? new Viking2(wave, this.mobCount) : new Viking3(wave, this.mobCount);
-        return new Viking1(wave, this.mobCount)
+        let type = Math.floor(Math.random() * 3)
+        return type === 0 ? new Viking1(wave, this.mobCount) : type === 1 ? new Viking2(wave, this.mobCount) : new Viking3(wave, this.mobCount);
     }
 
     manageMobs(player, frame, speed){
@@ -30,6 +30,7 @@ class Mobs {
         }
 
         const mobs = this.mobs;
+        const dead = this.dead;
         let mob = this.createMob(player.wave);
         if (player.wave > 1) mob.waveScalar();
 
@@ -42,18 +43,28 @@ class Mobs {
         for (let id in mobs){
             const mob = this.mobs[id];
             mob.update(frame, speed)
-            mob.loadRun();
+    
             if (mob.x >= 670) {
                 player.loseHP(mob.damage);
                 delete mobs[id];
                 this.currentMobs--;
-            } else if (mob.hp < 1) {
+            } else if (mob.hp < 1){
+                dead[id] = mob;
+                delete mobs[id];
+            } else {
+                mob.loadRun();
+            }
+        }
+
+        for (let id in dead){
+            const mob = dead[id]
+            mob.loadDeath();
+            mob.updateDeathFrame();
+            if (mob.deathFrame === 9){
                 if (player.endless()) player.addScore(mob.maxHP);
                 player.editMoney(mob.type + 1 + player.wave);
                 player.addMob();
-                //trigger death animation?
-                mob.loadDeath();
-                delete mobs[id]
+                delete dead[id];
                 this.currentMobs--;
             }
         }

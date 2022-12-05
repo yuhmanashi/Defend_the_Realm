@@ -13,6 +13,8 @@ class Viking {
         this.baseSpawnRate = 0;
         this.spawnRate = 0;
         this.frame = 0;
+        
+        this.deathFrame = 0;
     }
 
     update(frame, speed){
@@ -31,6 +33,14 @@ class Viking {
     updateSpeed(gameSpeed){
         this.speed = this.baseSpeed * gameSpeed;
         this.spawnRate = this.baseSpawnRate / gameSpeed;
+    }
+
+    updateDeathFrame(){
+        this.deathFrame += (1/4);
+    }
+
+    toggleDead(){
+        this.dead = true;
     }
 }
 
