@@ -49,7 +49,9 @@ class Archer extends Tower{
         //hits first enemy in range
         const inRange = this.mobInRange(mobs);
         if (inRange.length > 0){
-            inRange[0].loseHP(this.damage);
+            const mob = inRange[0];
+            mob.loseHP(this.damage);
+            mob.hitOn();
         }
 
         return inRange.length > 0;

@@ -4,10 +4,11 @@ const Util = require("../util.js");
 const canvas = document.getElementById('game-canvas');
 const ctx = canvas.getContext('2d');
 
-const attackAnimation = ['towers/IceWizard/attack/0', 'towers/IceWizard/attack/1', 'towers/IceWizard/attack/2', 'towers/IceWizard/attack/3', 'towers/IceWizard/attack/4', 
-'towers/IceWizard/attack/5', 'towers/IceWizard/attack/6', 'towers/IceWizard/attack/7', 'towers/IceWizard/attack/8', 'towers/IceWizard/attack/9']
-
-const IMAGES = [];
+const TowerUtil = require("./tower_util");
+// const attackAnimation = ['towers/IceWizard/attack/0', 'towers/IceWizard/attack/1', 'towers/IceWizard/attack/2', 'towers/IceWizard/attack/3', 'towers/IceWizard/attack/4', 
+// 'towers/IceWizard/attack/5', 'towers/IceWizard/attack/6', 'towers/IceWizard/attack/7', 'towers/IceWizard/attack/8', 'towers/IceWizard/attack/9']
+const attackAnimation = TowerUtil.generateImages('IceWizard', 'attack');
+const attackLoaded = [];
 
 class Wizard extends Tower{
     constructor(x = 0, y = 0) {
@@ -52,6 +53,7 @@ class Wizard extends Tower{
         for (let mob of inRange){
             if (mob.x >= targetMin && mob.x <= targetMax){
                 mob.loseHP(this.damage);
+                mob.hitOn();
             }
         }
 
@@ -59,11 +61,11 @@ class Wizard extends Tower{
     }
 
     draw(){
-        ctx.drawImage(IMAGES[Math.floor(this.frame)], this.x, this.y, 170, 170)
+        ctx.drawImage(attackLoaded[Math.floor(this.frame)], this.x, this.y, 170, 170)
     }
 
     preload(){
-        Util.preloadImages(this.animation, IMAGES, this.draw.bind(this));
+        Util.preloadImages(attackAnimation, attackLoaded, this.draw.bind(this));
     }
 }
 
