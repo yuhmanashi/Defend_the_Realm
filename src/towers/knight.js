@@ -46,14 +46,16 @@ class Knight extends Tower{
         for (let mob of inRange){
             mob.loseHP(this.damage)
         }
+
+        return inRange.length > 0
     }
 
-    drawAttack(){
-        ctx.drawImage(IMAGES[this.frame], this.x, this.y, 170, 170)
+    draw(){
+        ctx.drawImage(IMAGES[Math.floor(this.frame)], this.x, this.y, 170, 170)
     }
 
     preload(){
-        Util.preloadImages(this.animation, IMAGES, this.drawAttack.bind(this));
+        Util.preloadImages(this.animation, IMAGES, this.draw.bind(this));
     }
 }
 

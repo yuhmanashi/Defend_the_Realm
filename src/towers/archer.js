@@ -22,6 +22,7 @@ class Archer extends Tower{
         
         this.frame = 0;
         this.animation = attackAnimation;
+        this.animationOn = false;
     }
 
     mobInRange(mobs){
@@ -46,32 +47,20 @@ class Archer extends Tower{
     attack(mobs){
         //hits first enemy in range
         const inRange = this.mobInRange(mobs);
-        if (inRange.length > 0) inRange[0].loseHP(this.damage);
+        if (inRange.length > 0){
+            inRange[0].loseHP(this.damage);
+        }
+
+        return inRange.length > 0;
     }
 
-    // drawIdle(){
-    //     ctx.drawImage(IMAGES[0], this.x, this.y, 170, 170)
-    // }
-
-    // drawAttack(){
-    //     draw
-    // }
-
-    drawAttack(){
-        ctx.drawImage(IMAGES[this.frame], this.x, this.y, 170, 170)
+    draw(){
+        ctx.drawImage(IMAGES[Math.floor(this.frame)], this.x, this.y, 170, 170);
     }
 
     preload(){
-        Util.preloadImages(this.animation, IMAGES, this.drawAttack.bind(this));
+        Util.preloadImages(this.animation, IMAGES, this.draw.bind(this))
     }
-
-    // draw(){
-    //     if (Math.floor(this.frame) % Math.floor(this.speed / speed) === 0){
-    //         ctx.drawImage(IMAGES[this.frame], this.x, this.y, 170, 170)
-    //     } else {
-    //         ctx.drawImage(IMAGES[0], this.x, this.y, 170, 170)
-    //     }
-    // }
 }
 
 module.exports = Archer;

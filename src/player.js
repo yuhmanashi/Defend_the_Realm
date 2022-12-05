@@ -7,7 +7,7 @@ class Player {
     constructor(){
         this.hp = 10;
         this.maxHP = this.hp;
-        this.money = 150;
+        this.money = 200;
         this.wave = 1;
         this.maxWave = 5;
         this.mobsCount = 5;

@@ -11,6 +11,8 @@ class Tower {
         this.damage = 0;
         this.speed = 0;
         this.baseSpeed = 0;
+
+        this.animationOn = false;
     }
 
     update(x, y){
@@ -18,8 +20,19 @@ class Tower {
         if (this.y != y) this.y = y - this.height * 2;
     }
 
-    updateFrame(frame) {
-        this.frame = Math.floor((frame / 3) % 10);
+    toggleAnimation(){
+        this.animationOn = this.animationOn ? false : true;
+    }
+
+    updateFrame() {
+        if (this.animationOn){
+            if (this.frame === 9){
+                this.toggleAnimation();
+                this.frame = 0;
+            } else {
+                this.frame += (1/4);
+            }
+        }
     }
 
     checkMoney(player){

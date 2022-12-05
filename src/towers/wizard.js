@@ -50,16 +50,20 @@ class Wizard extends Tower{
         const targetMax = target.x + this.range;
 
         for (let mob of inRange){
-            if (mob.x >= targetMin && mob.x <= targetMax) mob.loseHP(this.damage);
+            if (mob.x >= targetMin && mob.x <= targetMax){
+                mob.loseHP(this.damage);
+            }
         }
+
+        return inRange.length > 0
     }
 
-    drawAttack(){
-        ctx.drawImage(IMAGES[this.frame], this.x, this.y, 170, 170)
+    draw(){
+        ctx.drawImage(IMAGES[Math.floor(this.frame)], this.x, this.y, 170, 170)
     }
 
     preload(){
-        Util.preloadImages(this.animation, IMAGES, this.drawAttack.bind(this));
+        Util.preloadImages(this.animation, IMAGES, this.draw.bind(this));
     }
 }
 

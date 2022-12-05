@@ -46,11 +46,10 @@ class Towers {
     attack(mobs, frame, speed){
         for (let pos in this.towers){
             const tower = this.towers[pos];
-            tower.updateFrame(frame);
+            tower.updateFrame();
             tower.preload();
-
             if (Math.floor(frame) % Math.floor(tower.speed / speed) === 0){
-                tower.attack(mobs);
+                if (tower.attack(mobs)) tower.toggleAnimation();
             }
         }
     }
