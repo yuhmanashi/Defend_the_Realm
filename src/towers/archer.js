@@ -12,7 +12,7 @@ const IMAGES = [];
 class Archer extends Tower{
     constructor(x = 0, y = 0) {
         super(x, y)
-        this.type = 1;
+        this.type = 2;
         this.color = 'green';
         this.range = 240; //60 * 4 
         this.damage = 2;
@@ -49,29 +49,29 @@ class Archer extends Tower{
         if (inRange.length > 0) inRange[0].loseHP(this.damage);
     }
 
+    // drawIdle(){
+    //     ctx.drawImage(IMAGES[0], this.x, this.y, 170, 170)
+    // }
+
+    // drawAttack(){
+    //     draw
+    // }
+
+    drawAttack(){
+        ctx.drawImage(IMAGES[this.frame], this.x, this.y, 170, 170)
+    }
+
     preload(){
-        Util.preloadImages(this.animation, IMAGES, this.draw.bind(this));
+        Util.preloadImages(this.animation, IMAGES, this.drawAttack.bind(this));
     }
 
-    draw(){
-        // total sprite width = 771
-        // 10 sprites
-        // per sprite width = 77
-        // this.x = 30
-        // this.y = 225
-        let sizeHeight = 130;
-        let sizeWidth = 130;
-        let spriteWidth = 90;
-        let spriteHeight = 90;
-        let spriteStartWidth = 90;
-        let spriteStartHeight = 0;
-
-        // ctx.drawImage(IMAGES[this.frame], this.x, 200, sizeWidth, sizeHeight)
-        ctx.drawImage(IMAGES[this.frame], 70, 70, 500, 380, this.x, 0, 130, 130)
-        // ctx.drawImage(IMAGES[this.type], this.x, this.y);
-        // ctx.drawImage(IMAGES[this.type], this.frame * this.spriteWidth, this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x, this.y, this.spriteWidth, this.spriteHeight);
-
-    }
+    // draw(){
+    //     if (Math.floor(this.frame) % Math.floor(this.speed / speed) === 0){
+    //         ctx.drawImage(IMAGES[this.frame], this.x, this.y, 170, 170)
+    //     } else {
+    //         ctx.drawImage(IMAGES[0], this.x, this.y, 170, 170)
+    //     }
+    // }
 }
 
 module.exports = Archer;

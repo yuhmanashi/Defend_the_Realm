@@ -4,7 +4,7 @@ const Knight = require('./knight.js');
 const Archer = require('./archer.js');
 const Wizard = require('./wizard.js');
 
-const URLS = ['towers/Knight/attack/0', 'towers/Archer/attack/0', 'towers/IceWizard/attack/0'];
+const URLS = ['towers/IceWizard/attack/0', 'towers/Knight/attack/0', 'towers/Archer/attack/0'];
 const IMAGES = [];
 
 class Towers {
@@ -34,6 +34,7 @@ class Towers {
     drawTowers(){
         for (let pos in this.towers){
             const tower = this.towers[pos];
+            // tower.draw()
             this.board.ctx.drawImage(IMAGES[tower.type], tower.x, tower.y, 170, 170);
         }
     }
@@ -47,10 +48,10 @@ class Towers {
             const tower = this.towers[pos];
             tower.updateFrame(frame);
             tower.preload();
+
             if (Math.floor(frame) % Math.floor(tower.speed / speed) === 0){
-                // tower.attack(mobs);
-                
-            } 
+                tower.attack(mobs);
+            }
         }
     }
 

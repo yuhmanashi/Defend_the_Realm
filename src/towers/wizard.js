@@ -1,15 +1,27 @@
 const Tower = require("./tower.js");
 
+const Util = require("../util.js");
+const canvas = document.getElementById('game-canvas');
+const ctx = canvas.getContext('2d');
+
+const attackAnimation = ['towers/IceWizard/attack/0', 'towers/IceWizard/attack/1', 'towers/IceWizard/attack/2', 'towers/IceWizard/attack/3', 'towers/IceWizard/attack/4', 
+'towers/IceWizard/attack/5', 'towers/IceWizard/attack/6', 'towers/IceWizard/attack/7', 'towers/IceWizard/attack/8', 'towers/IceWizard/attack/9']
+
+const IMAGES = [];
+
 class Wizard extends Tower{
     constructor(x = 0, y = 0) {
         super(x, y)
-        this.type = 2;
+        this.type = 0;
         this.color = 'blue';
         this.range = 300; // 60 * 5
         this.damage = 4;
         this.speed = 1100;
         this.baseSpeed = 1100;
         this.cost = 100;
+
+        this.frame = 0;
+        this.animation = attackAnimation;
     }
 
     mobsInRange(mobs){
@@ -40,6 +52,14 @@ class Wizard extends Tower{
         for (let mob of inRange){
             if (mob.x >= targetMin && mob.x <= targetMax) mob.loseHP(this.damage);
         }
+    }
+
+    drawAttack(){
+        ctx.drawImage(IMAGES[this.frame], this.x, this.y, 170, 170)
+    }
+
+    preload(){
+        Util.preloadImages(this.animation, IMAGES, this.drawAttack.bind(this));
     }
 }
 

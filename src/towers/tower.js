@@ -22,7 +22,6 @@ class Tower {
         this.frame = Math.floor((frame / 3) % 10);
     }
 
-
     checkMoney(player){
         if (player.money > 0 && player.money - this.cost >= 0){
             return true;

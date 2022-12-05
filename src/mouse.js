@@ -51,9 +51,9 @@ class Mouse {
             this.adjustPos();
             tower.update(this.x, this.y);
             
-            if (!towers.takenPos.has(this.x) && this.checkX(100, 700)){ //x-bounds
+            if (!towers.takenPos.has(this.x) && this.checkX(100, 640)){ //x-bounds
                 if (this.checkY(300 - 150, 300 + 10)){ //
-                    tower.update(this.x, (300 - 35));
+                    tower.update(this.x, (300 - 50));
                     towers.takenPos.add(this.x);
                     towers.addTower(this.x, tower);
                     player.editMoney(-(tower.cost));
@@ -63,11 +63,11 @@ class Mouse {
         }
 
         if (this.checkX(40, 100) && this.checkY(485, 585)) {
-            this.tower = towers.createTower(2);
-        } else if (this.checkX(130, 200) && this.checkY(485, 585)){
             this.tower = towers.createTower(0);
-        } else if (this.checkX(225, 300) && this.checkY(485, 585)){
+        } else if (this.checkX(130, 200) && this.checkY(485, 585)){
             this.tower = towers.createTower(1);
+        } else if (this.checkX(225, 300) && this.checkY(485, 585)){
+            this.tower = towers.createTower(2);
         }
     }
 
