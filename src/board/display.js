@@ -83,14 +83,19 @@ class Display {
         ctx.drawImage(backgrounds[3], (canvas.width/3) + 10, (canvas.height/2) + 100);
         
         ctx.fillStyle = "#ed5c5c";
-        ctx.font = '100px Syne Tactile, cursive';
-        ctx.fillText('Game Over', canvas.width/3 - 100, canvas.height/3 + 50);
+        ctx.font = '100px Berkshire Swash, cursive';
+        ctx.fillText('Game Over', canvas.width/3 - 100, canvas.height/2);
 
         if (player.endless()) {
-            ctx.fillStyle = "white";
             ctx.font = '50px Architects Daughter, cursive';
-            ctx.fillText(`Your Score: ${player.score}`, 210, 140);
-            ctx.fillText(`Furthest Wave: ${player.wave}`, 200, 80);
+
+            ctx.fillStyle = "white";
+            ctx.fillText(`Furthest Wave:`, 200, 120);
+            ctx.fillText(`Your Score:`, 210, 170);
+   
+            ctx.fillStyle = "#ed5c5c";
+            ctx.fillText(`${player.wave}`, 573, 120);
+            ctx.fillText(`${player.score}`, 510, 170);
         }
     }
     
@@ -107,23 +112,24 @@ class Display {
         
         ctx.drawImage(win[0], 0, 0, canvas.width, canvas.height);
         ctx.drawImage(win[1], (canvas.width/3) + 10, (canvas.height/2) + 100);
-        ctx.drawImage(win[2], 100, 100);
-        ctx.drawImage(win[3], 50, 200);
-        ctx.drawImage(win[4], 160, 260);
-        ctx.drawImage(win[5], 550, 130);
-        ctx.drawImage(win[6], 200, 100);
-        ctx.drawImage(win[7], 500, 250);
-        ctx.drawImage(win[11], 530, 90);
-        ctx.drawImage(win[8], 330, 250);
-        ctx.drawImage(win[9], 240, 270);
-        ctx.drawImage(win[10], 400, 260);
+        ctx.drawImage(win[2], 100, 130);
+        
+        ctx.drawImage(win[4], 150, 260);
+        ctx.drawImage(win[5], 580, 130);
+        ctx.drawImage(win[6], 160, 70);
+        ctx.drawImage(win[7], 530, 250);
+        ctx.drawImage(win[11], 570, 90);
+
+        ctx.drawImage(win[8], 360, 240);
+        ctx.drawImage(win[9], 250, 270);
+        ctx.drawImage(win[10], 430, 260);
 
 
         ctx.fillStyle = "#d9b327";
-        ctx.font = '100px Syne Tactile, cursive';
-        ctx.fillText('Victory!', canvas.width/3 - 20, canvas.height/3 + 60);
-        ctx.font = '40px Syne Tactile, cursive';
-        ctx.fillText('More to come soon...', canvas.width/3 - 10, canvas.height/3 + 330);
+        ctx.font = '100px Berkshire Swash, cursive';
+        ctx.fillText('Victory!', canvas.width/3 - 40, canvas.height/3 + 35);
+        ctx.font = '40px Berkshire Swash, cursive';
+        ctx.fillText('More to come soon...', canvas.width/3 - 40, canvas.height/3 + 350);
     }
 
     loadWin(){
@@ -140,11 +146,10 @@ class Display {
         ctx.drawImage(backgrounds[2], 205, (canvas.height/5) - 70);
         ctx.drawImage(backgrounds[4], (canvas.width/3) + 10, (canvas.height/2) + 150)
         ctx.fillStyle = 'black';
-        ctx.font = '28px Syne Tactile, cursive';
-        ctx.fillText("Choose your path.", 295, 120);
-        ctx.fillText("Top for classic.", 310, 160);
-        ctx.fillText("Bottom for endless.", 295, 200);
+        ctx.font = '28px Architects Daughter, cursive';
+        ctx.fillText("Choose your path.", 285, 150);
 
+        ctx.font = '28px Berkshire Swash, cursive';
         ctx.fillStyle = '#34ebb4';
         ctx.fillText("Classic", 360, 310)
 

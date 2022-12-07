@@ -9,6 +9,7 @@ class Viking {
         this.y = 0;
         this.type = 0;
         this.hp = 0;
+        this.maxHP = this.hp;
         this.speed = 0;
         this.baseSpeed = 0;
         this.damage = 0;

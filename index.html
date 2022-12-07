@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Defend the Realm</title>
     <link rel="icon" href="https://github.com/yuhmanashi/Defend_the_Realm/blob/main/assets/images/towers/base/knightbase120.png?raw=true">
-    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Berkshire+Swash&family=Supermercado+One&family=Syne+Tactile&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Berkshire+Swash&family=Roboto&family=Supermercado+One&family=Syne+Tactile&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css">
     <meta property="og:title" content="Defend the Realm"/>
     <meta property="og:image" content="https://github.com/yuhmanashi/SocialNetwork/blob/main/app/assets/images/ad.png?raw=true"/>
@@ -31,28 +31,31 @@
             <h2 style="margin-left: 3px; margin-bottom: 3px;">Character Info</h2>
             <div>
                 <ol>
-                    <li><strong>Knight:</strong>
+                    <li>
+                        <ul class="title">Wizard:</ul>
+                        <ul>Range: Long</ul>
+                        <ul>AtkSpeed: Slow</ul>
+                        <ul>Damage: 4</ul>
+                        <ul>Targets: All in range</ul>
+                        <ul>Cost: $100</ul>
+                    </li>
+                    <br>
+                    <li>
+                        <ul class="title">Knight:</ul>
                         <ul>Range: Short</ul>
-                        <ul>AtkSpeed: Medium</ul>
-                        <ul>Damage: 1</ul>
-                        <ul>Targets: All enemies in range</ul>
+                        <ul>AtkSpeed: Fast</ul>
+                        <ul>Damage: 3</ul>
+                        <ul>Targets: All in range</ul>
                         <ul>Cost: $50</ul>
                     </li>
                     <br>
-                    <li><strong>Archer:</strong>
+                    <li>
+                        <ul class="title">Archer:</ul>
                         <ul>Range: Long</ul>
                         <ul>AtkSpeed: Fast</ul>
-                        <ul>Damage: 1</ul>
-                        <ul>Targets: Single closest</ul>
-                        <ul>Cost: $50</ul>
-                    </li>
-                    <br>
-                    <li><strong>Wizard:</strong>
-                        <ul>Range: Longest</ul>
-                        <ul>AtkSpeed: Slow</ul>
                         <ul>Damage: 2</ul>
-                        <ul>Targets: All enemies in range</ul>
-                        <ul>Cost: $100</ul>
+                        <ul>Target: First closest</ul>
+                        <ul>Cost: $50</ul>
                     </li>
                 </ol>
             </div>
@@ -63,12 +66,14 @@
         <div id="instructions">
             <h2>How to play:</h2>
             <ol>
-                <li>Enemies spawn from left portal and move right.</li>
-                <li>HP is lost when an enemy reaches the right portal.</li>
-                <li>Click on characters on bottom right to select then click again on platform to place.</li>
-                <li>Characters will attack targets infront of them based on their range.</li>
-                <li>Classic Mode - win once you survive a certain amount of waves.</li>
-                <li>Endless Mode - Test your skills, play until you lose.</li>
+                <li>Enemies spawn from the left portal and move to the right.</li>
+                <li>Enemies get stronger after every wave</li>
+                <li>You lose HP when an enemy reaches the right portal.</li>
+                <li>Click on characters in shop to select them and then click again on the platform to place them.</li>
+                <li>Characters will attack targets infront of them based on their respective range.</li>
+                <h2>Modes:</h2>
+                <li>Classic - Game ends after a few waves.</li>
+                <li>Endless - Play until you lose.</li>
             </ol>
         </div>
     </div>
