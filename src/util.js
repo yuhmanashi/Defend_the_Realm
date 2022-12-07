@@ -19,7 +19,7 @@ const Util = {
             images.push(img);
         };
     },
-
+    
     reset(array){
         array.splice(0, array.length)
     }

@@ -4,10 +4,12 @@ const Util = require("../util.js");
 const canvas = document.getElementById('game-canvas');
 const ctx = canvas.getContext('2d');
 
-const attackAnimation = ['towers/Archer/attack/0', 'towers/Archer/attack/1', 'towers/Archer/attack/2', 'towers/Archer/attack/3', 'towers/Archer/attack/4',
-'towers/Archer/attack/5', 'towers/Archer/attack/6', 'towers/Archer/attack/7', 'towers/Archer/attack/8', 'towers/Archer/attack/9'];
+const TowerUtil = require("./tower_util");
+const attackAnimation = TowerUtil.generateImages('Archer', 'attack')
 
 const IMAGES = [];
+
+const Arrow = require('./projectiles/arrow');
 
 class Archer extends Tower{
     constructor(x = 0, y = 0) {
@@ -21,8 +23,10 @@ class Archer extends Tower{
         this.cost = 50;
         
         this.frame = 0;
-        this.animation = attackAnimation;
+
         this.animationOn = false;
+
+        this.projectile = new Arrow();
     }
 
     mobInRange(mobs){
@@ -37,7 +41,7 @@ class Archer extends Tower{
 
             const mob = mobs[id];
             // if (mob.x >= min && mob.x <= max){
-            if (mob.x >= min && mob.x <= this.x){
+            if (mob.x >= min && mob.x < this.x){
                 if (mob.hp > 0) inRange.push(mob);
             }
         }
@@ -49,7 +53,10 @@ class Archer extends Tower{
         //hits first enemy in range
         const inRange = this.mobInRange(mobs);
         if (inRange.length > 0){
-            inRange[0].loseHP(this.damage);
+            const mob = inRange[0];
+            this.projectile.update(this.x, this.y, mob.x, mob.speed);
+            mob.loseHP(this.damage);
+            mob.hitOn();
         }
 
         return inRange.length > 0;
@@ -60,7 +67,8 @@ class Archer extends Tower{
     }
 
     preload(){
-        Util.preloadImages(this.animation, IMAGES, this.draw.bind(this))
+        Util.preloadImages(attackAnimation, IMAGES, this.draw.bind(this));
+        if (this.projectile.on) this.projectile.animate();
     }
 }
 

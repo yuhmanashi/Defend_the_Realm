@@ -53,6 +53,11 @@ class Mobs {
                 dead[id] = mob;
                 delete mobs[id];
                 player.addMob();
+            } else if (mob.attacked){
+                mob.loadHit();
+                if (mob.hitFrame === 9){
+                    mob.hitOff();
+                }
             } else {
                 mob.loadRun();
             }

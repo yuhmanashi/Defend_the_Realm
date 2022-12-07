@@ -4,11 +4,14 @@ const canvas = document.getElementById('game-canvas');
 const ctx = canvas.getContext('2d');
 
 const MobUtil = require('../mob_util');
+
 const runSprites = MobUtil.generateImages('viking', '2', 'run');
 const dieSprites = MobUtil.generateImages('viking', '2', 'die');
+const hitSprites = MobUtil.generateImages('viking', '2', 'hit');
 
-const runLoaded = []
-const dieLoaded = []
+const runLoaded = [];
+const dieLoaded = [];
+const hitLoaded = [];
 
 class Viking2 extends Viking{
     constructor(wave, id){
@@ -24,6 +27,9 @@ class Viking2 extends Viking{
 
         this.frame = 0;
         this.deathFrame = 0;
+
+        this.attacked = false;
+        this.hitFrame = 0;
     }
 
     waveScalar(){
@@ -63,6 +69,22 @@ class Viking2 extends Viking{
 
     loadDeath(){
         Util.preloadImages(dieSprites, dieLoaded, this.die.bind(this))
+    }
+
+    hit(){
+        const dx = this.x;
+        const dy = 200;
+        const dWidth = 130;
+        const dHeight = 130;
+
+        ctx.drawImage(hitLoaded[Math.floor(this.hitFrame)], dx, dy, dWidth, dHeight)
+        ctx.fillStyle = '#f2e277';
+        ctx.font = '20px Syne Tactile, cursive';
+        ctx.fillText(Math.floor(this.hp), this.x + 70, this.y + 20)
+    }
+
+    loadHit(){
+        Util.preloadImages(hitSprites, hitLoaded, this.hit.bind(this))
     }
 }
 

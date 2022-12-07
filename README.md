@@ -56,7 +56,6 @@ Everything else is to create a mob, push it into the MOBS array, then work out t
 - Adding the option to upgrade towers,
 - Adding more towers and mobs,
 - Adding a variety of maps,
-- Making sprites move (animation),
 - Adding more modes,
 - Adding another aspect to game (eg. offer boons to players at the start of each round).
 - Fixing the flickering screen

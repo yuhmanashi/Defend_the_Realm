@@ -1,3 +1,5 @@
+const MobUtil = require("../mob_util");
+
 class Viking {
     constructor(wave, id) {
         this.wave = wave;
@@ -12,12 +14,16 @@ class Viking {
         this.damage = 0;
         this.baseSpawnRate = 0;
         this.spawnRate = 0;
-        this.frame = 0;
         
+        this.frame = 0;
         this.deathFrame = 0;
+
+        this.attacked = false;
+        this.hitFrame = 0;
     }
 
     update(frame, speed){
+        if (this.attacked) this.hitFrame += (1/4);
         this.frame = Math.floor((frame / 3) % 10);
         
         if (this.x <= 670) {
@@ -39,8 +45,13 @@ class Viking {
         this.deathFrame += (1/4);
     }
 
-    toggleDead(){
-        this.dead = true;
+    hitOn(){
+        this.attacked = true;
+    }
+
+    hitOff(){
+        this.attacked = false;
+        this.hitFrame = 0;
     }
 }
 

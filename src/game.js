@@ -5,6 +5,7 @@ const Display = require('./board/display');
 const Mouse = require('./mouse');
 
 const Towers = require('./towers/towers');
+const Ice = require('./towers/projectiles/ice');
 
 class Game {
     constructor(){
@@ -18,6 +19,8 @@ class Game {
         this.frame = 0;
         this.animationOn = false;
         this.gameMode = 0;
+
+        this.ice = new Ice(300, 300);
     }
 
     toggleAnimation(){
@@ -51,8 +54,13 @@ class Game {
 
             if (this.player.hp > 0) {
                 if (this.player.waveOver) this.frame = 1;
-                this.towers.attack(this.mobs.mobs, this.frame, this.player.speed);
                 this.mobs.manageMobs(this.player, this.frame, this.player.speed);
+                this.towers.attack(this.mobs.mobs, this.frame, this.player.speed);
+                
+                // ideal
+                // this.towers.attack(this.mobs.mobs, this.frame, this.player.speed);
+                // this.mobs.manageMobs(this.player, this.frame, this.player.speed);
+                // projectiles
             }
 
             this.frame++;
