@@ -4,8 +4,8 @@ const Util = require("../util.js");
 const canvas = document.getElementById('game-canvas');
 const ctx = canvas.getContext('2d');
 
-const attackAnimation = ['towers/Archer/attack/0', 'towers/Archer/attack/1', 'towers/Archer/attack/2', 'towers/Archer/attack/3', 'towers/Archer/attack/4',
-'towers/Archer/attack/5', 'towers/Archer/attack/6', 'towers/Archer/attack/7', 'towers/Archer/attack/8', 'towers/Archer/attack/9'];
+const TowerUtil = require("./tower_util");
+const attackAnimation = TowerUtil.generateImages('Archer', 'attack')
 
 const IMAGES = [];
 
@@ -23,7 +23,7 @@ class Archer extends Tower{
         this.cost = 50;
         
         this.frame = 0;
-        this.animation = attackAnimation;
+
         this.animationOn = false;
 
         this.projectile = new Arrow();
@@ -54,7 +54,7 @@ class Archer extends Tower{
         const inRange = this.mobInRange(mobs);
         if (inRange.length > 0){
             const mob = inRange[0];
-            this.projectile.update(this.x + 15, this.y, mob.x, mob.speed);
+            this.projectile.update(this.x, this.y, mob.x, mob.speed);
             mob.loseHP(this.damage);
             mob.hitOn();
         }
@@ -67,7 +67,7 @@ class Archer extends Tower{
     }
 
     preload(){
-        Util.preloadImages(this.animation, IMAGES, this.draw.bind(this));
+        Util.preloadImages(attackAnimation, IMAGES, this.draw.bind(this));
         if (this.projectile.on) this.projectile.animate();
     }
 }

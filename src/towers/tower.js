@@ -22,13 +22,13 @@ class Tower {
 
     toggleAnimation(){
         this.animationOn = this.animationOn ? false : true;
+        this.frame = 0;
     }
 
     updateFrame() {
         if (this.animationOn){
             if (this.frame === 9){
                 this.toggleAnimation();
-                this.frame = 0;
             } else {
                 this.frame += (1/4);
             }
