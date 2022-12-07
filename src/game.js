@@ -56,6 +56,11 @@ class Game {
                 if (this.player.waveOver) this.frame = 1;
                 this.mobs.manageMobs(this.player, this.frame, this.player.speed);
                 this.towers.attack(this.mobs.mobs, this.frame, this.player.speed);
+                
+                // ideal
+                // this.towers.attack(this.mobs.mobs, this.frame, this.player.speed);
+                // this.mobs.manageMobs(this.player, this.frame, this.player.speed);
+                // projectiles
             }
 
             this.frame++;

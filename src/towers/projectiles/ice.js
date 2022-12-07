@@ -27,7 +27,7 @@ class Ice {
         // }
     }
 
-    shootIce(){
+    draw(){
         const frame = Math.floor(this.frame);
         if (frame < 2){
             ctx.drawImage(iceLoaded[frame], this.x - 20, this.y + 20, 100, 100);
@@ -36,13 +36,13 @@ class Ice {
         }
     }
 
-    loadIce(){
-        Util.preloadImages(iceAnimation, iceLoaded, this.shootIce.bind(this));
+    preload(){
+        Util.preloadImages(iceAnimation, iceLoaded, this.draw.bind(this));
     }
 
     animate(){
         this.updateFrame();
-        this.loadIce();
+        this.preload();
     }
 
     update(x, y){

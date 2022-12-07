@@ -9,6 +9,8 @@ const attackAnimation = ['towers/Archer/attack/0', 'towers/Archer/attack/1', 'to
 
 const IMAGES = [];
 
+const Arrow = require('./projectiles/arrow');
+
 class Archer extends Tower{
     constructor(x = 0, y = 0) {
         super(x, y)
@@ -23,6 +25,8 @@ class Archer extends Tower{
         this.frame = 0;
         this.animation = attackAnimation;
         this.animationOn = false;
+
+        this.projectile = new Arrow();
     }
 
     mobInRange(mobs){
@@ -37,7 +41,7 @@ class Archer extends Tower{
 
             const mob = mobs[id];
             // if (mob.x >= min && mob.x <= max){
-            if (mob.x >= min && mob.x <= this.x){
+            if (mob.x >= min && mob.x < this.x){
                 if (mob.hp > 0) inRange.push(mob);
             }
         }
@@ -50,6 +54,7 @@ class Archer extends Tower{
         const inRange = this.mobInRange(mobs);
         if (inRange.length > 0){
             const mob = inRange[0];
+            this.projectile.update(this.x + 15, this.y, mob.x, mob.speed);
             mob.loseHP(this.damage);
             mob.hitOn();
         }
@@ -62,7 +67,8 @@ class Archer extends Tower{
     }
 
     preload(){
-        Util.preloadImages(this.animation, IMAGES, this.draw.bind(this))
+        Util.preloadImages(this.animation, IMAGES, this.draw.bind(this));
+        if (this.projectile.on) this.projectile.animate();
     }
 }
 

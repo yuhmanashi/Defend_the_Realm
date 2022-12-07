@@ -45,21 +45,17 @@ class Wizard extends Tower{
         const inRange = this.mobsInRange(mobs);
         if (inRange.length === 0) return;
 
-        const mid = Math.floor(inRange.length / 2);
-        const target = inRange[mid];
-        const targetMin = target.x - this.range;
-        const targetMax = target.x + this.range;
-        const targets = [];
+        const min = this.x - this.range;
+        const max = this.x; 
 
         for (let mob of inRange){
-            if (mob.x >= targetMin && mob.x <= this.x){
+            if (mob.x >= min && mob.x <= max){
                 mob.loseHP(this.damage);
                 mob.hitOn();
-                targets.push(mob.x);
             }
         }
 
-        this.projectile.update(this.x, this.y + 30, target.x);
+        this.projectile.update(this.x, this.y + 30);
         return inRange.length > 0;
     }
 
