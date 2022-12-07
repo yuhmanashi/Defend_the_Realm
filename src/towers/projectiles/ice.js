@@ -19,12 +19,6 @@ class Ice {
     updateFrame(){
         if (this.frame === 5) this.on = false;
         this.frame += (1/4);
-        // if (this.frame >= 6 && this.frame < 7){
-        //     this.pauseFrame += (1/4);
-        //     this.frame += (1/16);
-        // } else {
-        //     this.frame += (1/4)
-        // }
     }
 
     draw(){

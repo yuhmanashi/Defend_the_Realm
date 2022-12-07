@@ -34,7 +34,6 @@ class Towers {
     drawTowers(){
         for (let pos in this.towers){
             const tower = this.towers[pos];
-            // tower.draw()
             this.board.ctx.drawImage(IMAGES[tower.type], tower.x, tower.y, 170, 170);
         }
     }

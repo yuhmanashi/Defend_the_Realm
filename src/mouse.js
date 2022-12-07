@@ -32,7 +32,6 @@ class Mouse {
         return this.y >= low && this.y <= high;
     }   
 
-    //change bounds?
     towerListener(event){
         this.recalcPos(event);
         if (this.board.state !== 1) return;

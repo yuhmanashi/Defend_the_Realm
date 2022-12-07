@@ -87,10 +87,15 @@ class Display {
         ctx.fillText('Game Over', canvas.width/3 - 100, canvas.height/2);
 
         if (player.endless()) {
-            ctx.fillStyle = "white";
             ctx.font = '50px Architects Daughter, cursive';
-            ctx.fillText(`Your Score: ${player.score}`, 210, 170);
-            ctx.fillText(`Furthest Wave: ${player.wave}`, 200, 120);
+
+            ctx.fillStyle = "white";
+            ctx.fillText(`Furthest Wave:`, 200, 120);
+            ctx.fillText(`Your Score:`, 210, 170);
+   
+            ctx.fillStyle = "#ed5c5c";
+            ctx.fillText(`${player.wave}`, 573, 120);
+            ctx.fillText(`${player.score}`, 510, 170);
         }
     }
     
@@ -108,7 +113,7 @@ class Display {
         ctx.drawImage(win[0], 0, 0, canvas.width, canvas.height);
         ctx.drawImage(win[1], (canvas.width/3) + 10, (canvas.height/2) + 100);
         ctx.drawImage(win[2], 100, 130);
-        // ctx.drawImage(win[3], 50, 200);
+        
         ctx.drawImage(win[4], 150, 260);
         ctx.drawImage(win[5], 580, 130);
         ctx.drawImage(win[6], 160, 70);

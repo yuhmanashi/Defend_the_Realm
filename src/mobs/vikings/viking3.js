@@ -18,6 +18,7 @@ class Viking3 extends Viking{
         this.y = 200;
         this.type = 3;
         this.hp = 12;
+        this.maxHP = this.hp;
         this.speed = .1;
         this.baseSpeed = .1;
         this.damage = 1;

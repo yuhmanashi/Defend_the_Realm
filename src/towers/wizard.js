@@ -41,7 +41,7 @@ class Wizard extends Tower{
     }
 
     attack(mobs){
-        //hits all around the mob in middle of range
+        //hits all in range
         const inRange = this.mobsInRange(mobs);
         if (inRange.length === 0) return;
 

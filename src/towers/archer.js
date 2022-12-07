@@ -31,7 +31,6 @@ class Archer extends Tower{
 
     mobInRange(mobs){
         const min = this.x - this.range;
-        // const max = this.x + this.range;
         const inRange = [];
 
         for (let id in mobs){
@@ -40,7 +39,6 @@ class Archer extends Tower{
             }
 
             const mob = mobs[id];
-            // if (mob.x >= min && mob.x <= max){
             if (mob.x >= min && mob.x < this.x){
                 if (mob.hp > 0) inRange.push(mob);
             }
