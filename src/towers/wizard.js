@@ -1,12 +1,12 @@
 const Tower = require("./tower.js");
+const Ice = require("./projectiles/ice");
 
 const Util = require("../util.js");
 const canvas = document.getElementById('game-canvas');
 const ctx = canvas.getContext('2d');
 
 const TowerUtil = require("./tower_util");
-// const attackAnimation = ['towers/IceWizard/attack/0', 'towers/IceWizard/attack/1', 'towers/IceWizard/attack/2', 'towers/IceWizard/attack/3', 'towers/IceWizard/attack/4', 
-// 'towers/IceWizard/attack/5', 'towers/IceWizard/attack/6', 'towers/IceWizard/attack/7', 'towers/IceWizard/attack/8', 'towers/IceWizard/attack/9']
+
 const attackAnimation = TowerUtil.generateImages('IceWizard', 'attack');
 const attackLoaded = [];
 
@@ -22,7 +22,7 @@ class Wizard extends Tower{
         this.cost = 100;
 
         this.frame = 0;
-        this.animation = attackAnimation;
+        this.projectile = new Ice();
     }
 
     mobsInRange(mobs){
@@ -49,15 +49,18 @@ class Wizard extends Tower{
         const target = inRange[mid];
         const targetMin = target.x - this.range;
         const targetMax = target.x + this.range;
+        const targets = [];
 
         for (let mob of inRange){
-            if (mob.x >= targetMin && mob.x <= targetMax){
+            if (mob.x >= targetMin && mob.x <= this.x){
                 mob.loseHP(this.damage);
                 mob.hitOn();
+                targets.push(mob.x);
             }
         }
 
-        return inRange.length > 0
+        this.projectile.update(this.x, this.y + 30, target.x);
+        return inRange.length > 0;
     }
 
     draw(){
@@ -66,6 +69,7 @@ class Wizard extends Tower{
 
     preload(){
         Util.preloadImages(attackAnimation, attackLoaded, this.draw.bind(this));
+        if (this.projectile.on) this.projectile.animate();
     }
 }
 

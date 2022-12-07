@@ -1,7 +1,7 @@
 const TowerUtil = {
-    generateImages(tower, action){
+    generateImages(tower, action, numImages = 10){
         const images = [];
-        for (let i = 0; i < 10; i++){
+        for (let i = 0; i < numImages; i++){
             images.push(`towers/${tower}/${action}/${i}`)
         }
         return images
